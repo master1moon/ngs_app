@@ -15,10 +15,6 @@ class InventoryAdapter(
     private val onDeleteClick: (Inventory) -> Unit
 ) : ListAdapter<Inventory, InventoryAdapter.InventoryViewHolder>(InventoryDiffCallback()) {
 
-    // Note: This repository initialization is a placeholder.
-    // In a real app, it should be injected via a DI framework or passed through constructor.
-    private val repository = NetworkCardsRepository(null)
-
     private var packages: List<Package> = emptyList()
 
     fun setPackages(packages: List<Package>) {
@@ -47,48 +43,44 @@ class InventoryAdapter(
             val package_ = packages.find { it.id == inventory.packageId }
             
             binding.apply {
-                // اسم الباقة
-                packageName.text = package_?.name ?: "باقة غير معروفة"
-                
-                // الكمية
-                quantity.text = formatNumber(inventory.quantity.toDouble())
-                
-                // القيم المحسوبة
-                retailValue.text = formatPrice(calculateValue(inventory, package_, "retail"))
-                wholesaleValue.text = formatPrice(calculateValue(inventory, package_, "wholesale"))
-                distributorValue.text = formatPrice(calculateValue(inventory, package_, "distributor"))
-                
-                // تاريخ الإضافة
-                inventoryDate.text = inventory.createdAt
-                
-                // أزرار الإجراءات
-                btnEdit.setOnClickListener { onEditClick(inventory) }
-                btnDelete.setOnClickListener { onDeleteClick(inventory) }
-            }
-        }
+                // Set package name
+                tvPackageName.text = package_?.name ?: "باقة غير معروفة"
+                tvCreatedDate.text = inventory.createdAt
 
-        private fun calculateValue(inventory: Inventory, package_: Package?, priceType: String): Double {
-            if (package_ == null) return 0.0
-            
-            val price = when (priceType) {
-                "retail" -> package_.retailPrice
-                "wholesale" -> package_.wholesalePrice
-                "distributor" -> package_.distributorPrice
-                else -> package_.retailPrice
-            }
-            
-            return (price ?: 0.0) * inventory.quantity
-        }
+                // Format quantity with commas
+                tvQuantity.text = NetworkCardsRepository(null).formatNumber(inventory.quantity.toDouble())
 
-        private fun formatNumber(number: Double): String {
-            return repository.formatNumber(number)
-        }
+                // Calculate and format values
+                val retailValue = (package_?.retailPrice ?: 0.0) * inventory.quantity
+                val wholesaleValue = (package_?.wholesalePrice ?: 0.0) * inventory.quantity
+                val distributorValue = (package_?.distributorPrice ?: 0.0) * inventory.quantity
 
-        private fun formatPrice(price: Double): String {
-            return if (price > 0) {
-                repository.formatNumber(price)
-            } else {
-                "0"
+                tvRetailValue.text = if (retailValue > 0) {
+                    NetworkCardsRepository(null).formatNumber(retailValue)
+                } else {
+                    "-"
+                }
+
+                tvWholesaleValue.text = if (wholesaleValue > 0) {
+                    NetworkCardsRepository(null).formatNumber(wholesaleValue)
+                } else {
+                    "-"
+                }
+
+                tvDistributorValue.text = if (distributorValue > 0) {
+                    NetworkCardsRepository(null).formatNumber(distributorValue)
+                } else {
+                    "-"
+                }
+
+                // Set click listeners
+                btnEditInventory.setOnClickListener {
+                    onEditClick(inventory)
+                }
+
+                btnDeleteInventory.setOnClickListener {
+                    onDeleteClick(inventory)
+                }
             }
         }
     }
