@@ -2,7 +2,10 @@ package com.ngs.`775396439`.data.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "inventory")
 data class Inventory(
     @PrimaryKey
@@ -10,4 +13,4 @@ data class Inventory(
     val packageId: String,
     val quantity: Int,
     val createdAt: String
-)
+) : Parcelable

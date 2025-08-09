@@ -1,9 +1,9 @@
 package com.ngs.`775396439`.data
 
+import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import android.content.Context
 import com.ngs.`775396439`.data.dao.*
 import com.ngs.`775396439`.data.entity.*
 
@@ -21,7 +21,6 @@ import com.ngs.`775396439`.data.entity.*
 )
 abstract class AppDatabase : RoomDatabase() {
     
-    // DAOs
     abstract fun packageDao(): PackageDao
     abstract fun inventoryDao(): InventoryDao
     abstract fun storeDao(): StoreDao

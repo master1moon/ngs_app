@@ -10,9 +10,6 @@ interface InventoryDao {
     @Query("SELECT * FROM inventory ORDER BY createdAt DESC")
     fun getAllInventory(): Flow<List<Inventory>>
     
-    @Query("SELECT * FROM inventory WHERE packageId = :packageId")
-    fun getInventoryByPackage(packageId: String): Flow<List<Inventory>>
-    
     @Query("SELECT * FROM inventory WHERE id = :id")
     suspend fun getInventoryById(id: String): Inventory?
     
@@ -25,9 +22,15 @@ interface InventoryDao {
     @Delete
     suspend fun deleteInventory(inventory: Inventory)
     
-    @Query("SELECT SUM(quantity) FROM inventory")
-    suspend fun getTotalCards(): Int?
+    @Query("SELECT * FROM inventory WHERE packageId = :packageId")
+    suspend fun getInventoryByPackage(packageId: String): List<Inventory>
     
     @Query("SELECT SUM(quantity) FROM inventory WHERE packageId = :packageId")
     suspend fun getTotalCardsByPackage(packageId: String): Int?
+    
+    @Query("SELECT SUM(quantity) FROM inventory")
+    suspend fun getTotalCards(): Int?
+    
+    @Query("SELECT COUNT(*) FROM inventory")
+    suspend fun getInventoryCount(): Int
 }
