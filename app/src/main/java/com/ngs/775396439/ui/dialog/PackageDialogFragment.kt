@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment
 import com.ngs.`775396439`.data.entity.Package
 import com.ngs.`775396439`.data.repository.NetworkCardsRepository
 import com.ngs.`775396439`.databinding.DialogPackageBinding
+import com.ngs.`775396439`.utils.NumberFormatTextWatcher
 
 class PackageDialogFragment : DialogFragment() {
     
@@ -65,6 +66,11 @@ class PackageDialogFragment : DialogFragment() {
         binding.retailPrice.hint = getString(com.ngs.`775396439`.R.string.price_hint)
         binding.wholesalePrice.hint = getString(com.ngs.`775396439`.R.string.price_hint)
         binding.distributorPrice.hint = getString(com.ngs.`775396439`.R.string.price_hint)
+        
+        // تطبيق تنسيق الأرقام على حقول الأسعار
+        NumberFormatTextWatcher.applyTo(binding.retailPrice)
+        NumberFormatTextWatcher.applyTo(binding.wholesalePrice)
+        NumberFormatTextWatcher.applyTo(binding.distributorPrice)
     }
     
     private fun setupListeners() {
@@ -85,18 +91,18 @@ class PackageDialogFragment : DialogFragment() {
         binding.packageDate.setText(package_.createdAt)
     }
     
-    private fun savePackage() {
+        private fun savePackage() {
         val name = binding.packageName.text.toString().trim()
         val retailPrice = parsePrice(binding.retailPrice.text.toString())
         val wholesalePrice = parsePrice(binding.wholesalePrice.text.toString())
         val distributorPrice = parsePrice(binding.distributorPrice.text.toString())
         val date = binding.packageDate.text.toString()
-        
+
         if (name.isEmpty()) {
             binding.packageName.error = "يرجى إدخال اسم الباقة"
             return
         }
-        
+
         val newPackage = if (package_ != null) {
             package_!!.copy(
                 name = name,
@@ -116,14 +122,14 @@ class PackageDialogFragment : DialogFragment() {
                 image = ""
             )
         }
-        
+
         onSaveCallback?.invoke(newPackage)
         dismiss()
     }
-    
+
     private fun parsePrice(text: String): Double? {
         return try {
-            val cleanText = text.replace(",", "").trim()
+            val cleanText = NumberFormatTextWatcher.removeFormatting(text).trim()
             if (cleanText.isEmpty()) null else cleanText.toDouble()
         } catch (e: NumberFormatException) {
             null
@@ -132,7 +138,7 @@ class PackageDialogFragment : DialogFragment() {
     
     private fun formatPriceForInput(price: Double?): String {
         return if (price != null && price > 0) {
-            repository.formatNumber(price)
+            NumberFormatTextWatcher.formatNumber(price.toLong())
         } else {
             ""
         }
