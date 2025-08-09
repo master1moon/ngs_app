@@ -10,6 +10,7 @@ import com.ngs.`775396439`.data.entity.Inventory
 import com.ngs.`775396439`.data.entity.Package
 import com.ngs.`775396439`.data.repository.NetworkCardsRepository
 import com.ngs.`775396439`.databinding.DialogInventoryBinding
+import com.ngs.`775396439`.utils.NumberFormatTextWatcher
 
 class InventoryDialogFragment : DialogFragment() {
 
@@ -72,6 +73,9 @@ class InventoryDialogFragment : DialogFragment() {
         // إعداد حقول الإدخال
         binding.inventoryQuantity.hint = getString(com.ngs.`775396439`.R.string.quantity_hint)
         binding.inventoryDate.hint = getString(com.ngs.`775396439`.R.string.date_hint)
+        
+        // تطبيق تنسيق الأرقام على حقل الكمية
+        NumberFormatTextWatcher.applyTo(binding.inventoryQuantity)
     }
 
     private fun setupListeners() {
@@ -98,7 +102,7 @@ class InventoryDialogFragment : DialogFragment() {
             binding.inventoryPackage.setSelection(packageIndex)
         }
 
-        binding.inventoryQuantity.setText(inventory.quantity.toString())
+        binding.inventoryQuantity.setText(NumberFormatTextWatcher.formatNumber(inventory.quantity.toLong()))
         binding.inventoryDate.setText(inventory.createdAt)
     }
 
@@ -118,7 +122,7 @@ class InventoryDialogFragment : DialogFragment() {
         }
 
         val quantity = try {
-            quantityText.toInt()
+            NumberFormatTextWatcher.removeFormatting(quantityText).toInt()
         } catch (e: NumberFormatException) {
             binding.inventoryQuantity.error = "يرجى إدخال كمية صحيحة"
             return
