@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.ngs.cards775396439.app-mergeDebugResources-47:/values-ml/values-ml.xml",
+            "outputFile": "com.ngs.cards775396439.app-mergeDebugResources-51:/values-ml/values-ml.xml",
             "map": [
                 {
                     "source": "/home/ubuntu/.gradle/caches/transforms-3/bac5f0c3b8e5ec263f9d21ba769ed767/transformed/core-1.12.0/res/values-ml/values-ml.xml",

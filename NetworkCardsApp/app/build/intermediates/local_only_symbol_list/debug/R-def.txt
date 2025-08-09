@@ -89,12 +89,9 @@ drawable payment_icon_background
 drawable quantity_background
 drawable sale_icon_background
 drawable store_icon_background
-id drawerLayout
-id fragmentContainer
 id nav_about
 id nav_dashboard
 id nav_expenses
-id nav_graph
 id nav_import_export
 id nav_inventory
 id nav_packages
@@ -102,10 +99,8 @@ id nav_payments
 id nav_reports
 id nav_sales
 id nav_stores
-id navigationView
 id progressBar
 id textView
-id toolbar
 layout activity_main
 layout fragment_packages
 layout nav_header
@@ -113,7 +108,6 @@ layout nav_header_main
 menu nav_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
-navigation nav_graph
 string about_title
 string add
 string app_name

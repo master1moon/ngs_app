@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.ngs.cards775396439.app-mergeDebugResources-47:/values-gu/values-gu.xml",
+            "outputFile": "com.ngs.cards775396439.app-mergeDebugResources-51:/values-gu/values-gu.xml",
             "map": [
                 {
                     "source": "/home/ubuntu/.gradle/caches/transforms-3/b7360d7df558d5a215eed346853567b3/transformed/appcompat-1.6.1/res/values-gu/values-gu.xml",
