@@ -4,15 +4,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp">
+    android:padding="24dp"
+    android:background="@color/background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="قسم الباقات"
+        android:textColor="@color/primary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="عدد الباقات: 0"
+        android:text="مرحباً بك في نظام بيع الكروت والمصروفات!\n\nاضغط هنا لإضافة باقة تجريبية"
         android:textColor="@color/text_primary"
-        android:textSize="18sp" />
+        android:textSize="16sp"
+        android:gravity="center"
+        android:background="@color/surface"
+        android:padding="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -20,5 +37,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:visibility="gone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="اضغط على النص أعلاه لإضافة باقة تجريبية"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:layout_marginTop="16dp" />
 
 </LinearLayout>

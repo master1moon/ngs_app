@@ -38,13 +38,27 @@ class PackagesFragment : Fragment() {
     private fun setupRepository() {
         val database = AppDatabase.getDatabase(requireContext())
         val repository = NetworkCardsRepository(database)
-        viewModel = ViewModelProvider(this)[PackagesViewModel::class.java]
+        
+        // Create ViewModel with repository
+        viewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
+            override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
+                return PackagesViewModel(repository) as T
+            }
+        })[PackagesViewModel::class.java]
     }
     
     private fun setupObservers() {
         viewModel.packages.observe(viewLifecycleOwner) { packages ->
-            // TODO: Update RecyclerView with packages
             binding.textView.text = "عدد الباقات: ${packages.size}"
+            
+            if (packages.isEmpty()) {
+                binding.textView.text = "لا توجد باقات حالياً\nاضغط زر الإضافة لإنشاء باقة جديدة"
+            } else {
+                val packagesText = packages.joinToString("\n") { 
+                    "• ${it.name} - ${it.price} د.ك" 
+                }
+                binding.textView.text = "الباقات المتوفرة:\n$packagesText"
+            }
         }
         
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
@@ -53,14 +67,16 @@ class PackagesFragment : Fragment() {
         
         viewModel.errorMessage.observe(viewLifecycleOwner) { error ->
             error?.let {
-                // TODO: Show error message
+                binding.textView.text = "خطأ: $it"
             }
         }
     }
     
     private fun setupClickListeners() {
-        binding.fabAdd.setOnClickListener {
-            // TODO: Show add package dialog
+        // Add a simple button for testing
+        binding.textView.setOnClickListener {
+            // Add a test package
+            viewModel.addPackage("باقة تجريبية", 10.0, "باقة للاختبار")
         }
     }
     

@@ -44,6 +44,8 @@ class PackagesViewModel(private val repository: NetworkCardsRepository) : ViewMo
             try {
                 val package_ = Package(name = name, price = price, description = description)
                 repository.insertPackage(package_)
+                // Reload packages after adding
+                loadPackages()
             } catch (e: Exception) {
                 _errorMessage.value = e.message
             }
