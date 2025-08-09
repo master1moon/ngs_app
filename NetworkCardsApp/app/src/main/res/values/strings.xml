@@ -140,6 +140,37 @@
     <string name="total_expenses">إجمالي المصروفات</string>
     <string name="loading_reports">جاري تحميل التقارير...</string>
     
+    <!-- Sales Section -->
+    <string name="sales_title">المبيعات</string>
+    <string name="sales_description">إدارة عمليات البيع والمبيعات</string>
+    <string name="add_sale">إضافة مبيعات</string>
+    <string name="edit_sale">تعديل المبيعات</string>
+    <string name="delete_sale_title">حذف المبيعات</string>
+    <string name="delete_sale_message">هل أنت متأكد من حذف المبيعات: %s؟</string>
+    <string name="sale_deleted">تم حذف المبيعات بنجاح</string>
+    <string name="no_sales">لا توجد مبيعات</string>
+    <string name="add_first_sale">أضف أول عملية بيع</string>
+    <string name="loading_sales">جاري تحميل المبيعات...</string>
+    <string name="select_store_hint">اختر المحل</string>
+    <string name="select_package_hint">اختر الباقة</string>
+    <string name="sale_reason_hint">سبب البيع</string>
+    <string name="sale_quantity_hint">الكمية</string>
+    <string name="sale_price_per_unit_hint">سعر الوحدة</string>
+    <string name="sale_amount_hint">المبلغ</string>
+    <string name="sale_date_hint">التاريخ</string>
+    <string name="store_required">يرجى اختيار المحل</string>
+    <string name="package_required">يرجى اختيار الباقة</string>
+    <string name="sale_reason_required">يرجى إدخال سبب البيع</string>
+    <string name="quantity_required">يرجى إدخال الكمية</string>
+    <string name="amount_required">يرجى إدخال المبلغ</string>
+    <string name="price_per_unit_required">يرجى إدخال سعر الوحدة</string>
+    <string name="invalid_quantity">كمية غير صحيحة</string>
+    <string name="invalid_amount">مبلغ غير صحيح</string>
+    <string name="invalid_price">سعر غير صحيح</string>
+    <string name="quantity_must_be_positive">يجب أن تكون الكمية أكبر من صفر</string>
+    <string name="amount_must_be_positive">يجب أن يكون المبلغ أكبر من صفر</string>
+    <string name="price_must_be_positive">يجب أن يكون السعر أكبر من صفر</string>
+    
     <!-- About Section -->
     <string name="developer_name">أحمد محمد</string>
     <string name="developer_phone">+965 12345678</string>
