@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface InventoryDao {
+    
     @Query("SELECT * FROM inventory ORDER BY createdAt DESC")
     fun getAllInventory(): Flow<List<Inventory>>
     
@@ -26,4 +27,7 @@ interface InventoryDao {
     
     @Query("SELECT SUM(quantity) FROM inventory")
     suspend fun getTotalCards(): Int?
+    
+    @Query("SELECT SUM(quantity) FROM inventory WHERE packageId = :packageId")
+    suspend fun getTotalCardsByPackage(packageId: String): Int?
 }

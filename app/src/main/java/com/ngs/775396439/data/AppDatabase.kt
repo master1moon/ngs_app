@@ -21,6 +21,7 @@ import com.ngs.`775396439`.data.entity.*
 )
 abstract class AppDatabase : RoomDatabase() {
     
+    // DAOs
     abstract fun packageDao(): PackageDao
     abstract fun inventoryDao(): InventoryDao
     abstract fun storeDao(): StoreDao
@@ -38,7 +39,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "network_cards_database"
-                ).build()
+                )
+                .fallbackToDestructiveMigration()
+                .build()
                 INSTANCE = instance
                 instance
             }

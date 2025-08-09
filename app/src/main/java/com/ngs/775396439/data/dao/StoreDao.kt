@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StoreDao {
+    
     @Query("SELECT * FROM stores ORDER BY createdAt DESC")
     fun getAllStores(): Flow<List<Store>>
     
@@ -23,4 +24,7 @@ interface StoreDao {
     
     @Query("SELECT COUNT(*) FROM stores")
     suspend fun getStoresCount(): Int
+    
+    @Query("SELECT * FROM stores ORDER BY createdAt DESC LIMIT :limit")
+    suspend fun getRecentStores(limit: Int): List<Store>
 }

@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PackageDao {
+    
     @Query("SELECT * FROM packages ORDER BY createdAt DESC")
     fun getAllPackages(): Flow<List<Package>>
     
@@ -23,4 +24,7 @@ interface PackageDao {
     
     @Query("SELECT COUNT(*) FROM packages")
     suspend fun getPackagesCount(): Int
+    
+    @Query("SELECT * FROM packages ORDER BY createdAt DESC LIMIT :limit")
+    suspend fun getRecentPackages(limit: Int): List<Package>
 }
