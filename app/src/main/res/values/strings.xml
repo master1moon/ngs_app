@@ -1,82 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">نظام بيع الكروت</string>
+    <string name="app_name">نظام بيع الكروت والمصروفات</string>
     
     <!-- Navigation -->
     <string name="dashboard">لوحة التحكم</string>
     <string name="packages">الباقات والأسعار</string>
     <string name="inventory">كمية الكروت</string>
-    <string name="stores">البقالات والمحلات</string>
+    <string name="stores">المحلات</string>
     <string name="expenses">المصروفات</string>
     <string name="reports">التقارير</string>
     <string name="import_export">الاستيراد والتصدير</string>
+    <string name="about">حول التطبيق</string>
     
-    <!-- Dashboard -->
-    <string name="quick_stats">إحصائيات سريعة</string>
-    <string name="packages_count">عدد الباقات</string>
+    <!-- Dashboard Stats -->
+    <string name="total_packages">إجمالي الباقات</string>
+    <string name="total_stores">إجمالي المحلات</string>
     <string name="total_cards">إجمالي الكروت</string>
-    <string name="stores_count">عدد المحلات</string>
     <string name="total_sales">إجمالي المبيعات</string>
     <string name="net_profit">صافي الأرباح</string>
-    <string name="recent_packages">أحدث الباقات</string>
-    <string name="recent_stores">أحدث المحلات</string>
     
-    <!-- Packages -->
-    <string name="add_package">إضافة باقة</string>
-    <string name="edit_package">تعديل الباقة</string>
-    <string name="package_name">اسم الباقة</string>
-    <string name="package_name_hint">أدخل اسم الباقة</string>
-    <string name="retail_price">سعر التجزئة</string>
-    <string name="wholesale_price">سعر الجملة</string>
-    <string name="distributor_price">سعر الموزعين</string>
-    <string name="price_hint">أدخل السعر</string>
-    <string name="package_image">صورة الباقة</string>
-    <string name="package_date">تاريخ الإضافة</string>
-    <string name="no_packages">لا توجد باقات</string>
-    <string name="no_packages_message">اضغط على زر الإضافة لإنشاء باقة جديدة</string>
-    <string name="retail_label">تجزئة</string>
-    <string name="wholesale_label">جملة</string>
-                <string name="distributor_label">موزعين</string>
-
-            <!-- Inventory -->
-            <string name="add_inventory">إضافة كمية جديدة</string>
-            <string name="edit_inventory">تعديل الكمية</string>
-            <string name="select_package">اختر الباقة</string>
-            <string name="quantity">الكمية</string>
-            <string name="quantity_hint">أدخل الكمية</string>
-            <string name="inventory_date">تاريخ الإضافة</string>
-            <string name="date_hint">تاريخ الإضافة</string>
-            <string name="no_inventory">لا يوجد مخزون</string>
-            <string name="no_inventory_message">اضغط على زر الإضافة لإضافة كمية جديدة</string>
-
-            <!-- About -->
-            <string name="app_logo">شعار التطبيق</string>
-            <string name="developer_name">اسم المطور</string>
-            <string name="phone">الهاتف</string>
-            <string name="email">البريد الإلكتروني</string>
-            <string name="website">الموقع الإلكتروني</string>
-            <string name="call">اتصال</string>
-            <string name="whatsapp">واتساب</string>
-            <string name="app_description">تطبيق نظام بيع الكروت والمصروفات هو تطبيق متكامل لإدارة أعمال بيع الكروت والتحكم في المصروفات. يوفر التطبيق واجهة سهلة الاستخدام لإدارة الباقات والأسعار، تتبع المخزون، إدارة المحلات والبيع، وتسجيل المصروفات. التطبيق مصمم خصيصاً للعمل باللغة العربية ويوفر تقارير مفصلة لمساعدتك في اتخاذ القرارات المالية الصحيحة.</string>
-
-              <!-- Common -->
-              <string name="add">إضافة</string>
-              <string name="edit">تعديل</string>
+    <!-- Common Actions -->
+    <string name="add">إضافة</string>
+    <string name="edit">تعديل</string>
     <string name="delete">حذف</string>
     <string name="save">حفظ</string>
     <string name="cancel">إلغاء</string>
     <string name="confirm">تأكيد</string>
-    <string name="name">الاسم</string>
-    <string name="date">التاريخ</string>
-    <string name="amount">المبلغ</string>
-    <string name="notes">ملاحظات</string>
-    <string name="actions">الإجراءات</string>
+    <string name="close">إغلاق</string>
     
     <!-- Price Types -->
-    <string name="retail">تجزئة</string>
-    <string name="wholesale">جملة</string>
-    <string name="distributor">موزعين</string>
+    <string name="retail_price">سعر التجزئة</string>
+    <string name="wholesale_price">سعر الجملة</string>
+    <string name="distributor_price">سعر الموزعين</string>
+    <string name="retail_price_hint">أدخل سعر التجزئة</string>
+    <string name="wholesale_price_hint">أدخل سعر الجملة</string>
+    <string name="distributor_price_hint">أدخل سعر الموزعين</string>
     
     <!-- Currency -->
-    <string name="currency">ر.ي</string>
+    <string name="currency_symbol">د.ك</string>
+    
+    <!-- Packages Section -->
+    <string name="packages_title">الباقات والأسعار</string>
+    <string name="packages_description">إدارة الباقات وأسعارها المختلفة</string>
+    <string name="add_package">إضافة باقة جديدة</string>
+    <string name="edit_package">تعديل الباقة</string>
+    <string name="package_name_hint">أدخل اسم الباقة</string>
+    <string name="package_date_hint">تاريخ الإضافة</string>
+    <string name="package_name_required">يرجى إدخال اسم الباقة</string>
+    <string name="prices_section">الأسعار</string>
+    <string name="no_packages">لا توجد باقات</string>
+    <string name="add_first_package">اضغط على زر الإضافة لإنشاء باقة جديدة</string>
+    <string name="loading_packages">جاري تحميل الباقات...</string>
+    <string name="delete_package_title">حذف الباقة</string>
+    <string name="delete_package_message">هل أنت متأكد من حذف الباقة \"%s\"؟</string>
+    <string name="package_deleted">تم حذف الباقة بنجاح</string>
+    
+    <!-- Export -->
+    <string name="export_pdf">PDF</string>
+    <string name="export_excel">Excel</string>
+    <string name="export_json">JSON</string>
+    <string name="export_pdf_success">تم التصدير إلى PDF بنجاح</string>
+    <string name="export_excel_success">تم التصدير إلى Excel بنجاح</string>
+    <string name="export_json_success">تم التصدير إلى JSON بنجاح</string>
+    <string name="export_error">خطأ في التصدير</string>
+    <string name="no_data_to_export">لا توجد بيانات للتصدير</string>
+    
+    <!-- About Section -->
+    <string name="developer_name">أحمد محمد</string>
+    <string name="developer_phone">+965 12345678</string>
+    <string name="developer_email">ahmed@example.com</string>
+    <string name="developer_website">www.example.com</string>
+    <string name="app_description">تطبيق متكامل لإدارة بيع الكروت والمصروفات</string>
+    <string name="contact_phone">اتصل</string>
+    <string name="contact_whatsapp">واتساب</string>
+    <string name="contact_email">إيميل</string>
+    <string name="contact_website">موقع</string>
+    <string name="copyright">© 2025 جميع الحقوق محفوظة</string>
 </resources>

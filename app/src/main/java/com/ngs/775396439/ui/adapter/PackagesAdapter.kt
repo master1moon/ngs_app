@@ -6,15 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ngs.`775396439`.data.entity.Package
-import com.ngs.`775396439`.databinding.ItemPackageBinding
 import com.ngs.`775396439`.data.repository.NetworkCardsRepository
+import com.ngs.`775396439`.databinding.ItemPackageBinding
 
 class PackagesAdapter(
     private val onEditClick: (Package) -> Unit,
     private val onDeleteClick: (Package) -> Unit
 ) : ListAdapter<Package, PackagesAdapter.PackageViewHolder>(PackageDiffCallback()) {
-
-    private val repository = NetworkCardsRepository(null) // سيتم حقنه لاحقاً
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PackageViewHolder {
         val binding = ItemPackageBinding.inflate(
@@ -35,25 +33,36 @@ class PackagesAdapter(
 
         fun bind(package_: Package) {
             binding.apply {
-                packageName.text = package_.name
-                packageDate.text = package_.createdAt
-                
-                // عرض الأسعار
-                retailPrice.text = "${getString(com.ngs.`775396439`.R.string.retail_label)}: ${formatPrice(package_.retailPrice)}"
-                wholesalePrice.text = "${getString(com.ngs.`775396439`.R.string.wholesale_label)}: ${formatPrice(package_.wholesalePrice)}"
-                distributorPrice.text = "${getString(com.ngs.`775396439`.R.string.distributor_label)}: ${formatPrice(package_.distributorPrice)}"
-                
-                // أزرار الإجراءات
-                btnEdit.setOnClickListener { onEditClick(package_) }
-                btnDelete.setOnClickListener { onDeleteClick(package_) }
-            }
-        }
+                tvPackageName.text = package_.name
+                tvCreatedDate.text = package_.createdAt
 
-        private fun formatPrice(price: Double?): String {
-            return if (price != null && price > 0) {
-                repository.formatNumber(price)
-            } else {
-                "0"
+                // Format prices with commas
+                tvRetailPrice.text = if (package_.retailPrice != null && package_.retailPrice > 0) {
+                    NetworkCardsRepository(null).formatNumber(package_.retailPrice)
+                } else {
+                    "-"
+                }
+
+                tvWholesalePrice.text = if (package_.wholesalePrice != null && package_.wholesalePrice > 0) {
+                    NetworkCardsRepository(null).formatNumber(package_.wholesalePrice)
+                } else {
+                    "-"
+                }
+
+                tvDistributorPrice.text = if (package_.distributorPrice != null && package_.distributorPrice > 0) {
+                    NetworkCardsRepository(null).formatNumber(package_.distributorPrice)
+                } else {
+                    "-"
+                }
+
+                // Set click listeners
+                btnEditPackage.setOnClickListener {
+                    onEditClick(package_)
+                }
+
+                btnDeletePackage.setOnClickListener {
+                    onDeleteClick(package_)
+                }
             }
         }
     }

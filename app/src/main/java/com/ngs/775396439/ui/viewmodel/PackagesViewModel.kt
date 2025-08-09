@@ -24,16 +24,16 @@ class PackagesViewModel(private val repository: NetworkCardsRepository) : ViewMo
         loadPackages()
     }
     
-    private fun loadPackages() {
+    fun loadPackages() {
         viewModelScope.launch {
-            _isLoading.value = true
             try {
-                repository.getAllPackages().collect { packages ->
-                    _packages.value = packages
-                    _isLoading.value = false
+                _isLoading.value = true
+                repository.getAllPackages().collect { packagesList ->
+                    _packages.value = packagesList
                 }
             } catch (e: Exception) {
                 _errorMessage.value = "خطأ في تحميل الباقات: ${e.message}"
+            } finally {
                 _isLoading.value = false
             }
         }
@@ -43,27 +43,26 @@ class PackagesViewModel(private val repository: NetworkCardsRepository) : ViewMo
         name: String,
         retailPrice: Double?,
         wholesalePrice: Double?,
-        distributorPrice: Double?,
-        image: String = ""
+        distributorPrice: Double?
     ) {
+        if (name.isBlank()) {
+            _errorMessage.value = "يرجى إدخال اسم الباقة"
+            return
+        }
+        
         viewModelScope.launch {
             try {
-                if (name.isBlank()) {
-                    _errorMessage.value = "يرجى إدخال اسم الباقة"
-                    return@launch
-                }
-                
-                val package_ = Package(
+                val newPackage = Package(
                     id = repository.generateId(),
                     name = name.trim(),
                     retailPrice = retailPrice,
                     wholesalePrice = wholesalePrice,
                     distributorPrice = distributorPrice,
                     createdAt = repository.getCurrentDate(),
-                    image = image
+                    image = ""
                 )
                 
-                repository.insertPackage(package_)
+                repository.insertPackage(newPackage)
                 _errorMessage.value = null
             } catch (e: Exception) {
                 _errorMessage.value = "خطأ في إضافة الباقة: ${e.message}"
@@ -71,16 +70,32 @@ class PackagesViewModel(private val repository: NetworkCardsRepository) : ViewMo
         }
     }
     
-    fun updatePackage(package_: Package) {
+    fun updatePackage(
+        id: String,
+        name: String,
+        retailPrice: Double?,
+        wholesalePrice: Double?,
+        distributorPrice: Double?
+    ) {
+        if (name.isBlank()) {
+            _errorMessage.value = "يرجى إدخال اسم الباقة"
+            return
+        }
+        
         viewModelScope.launch {
             try {
-                if (package_.name.isBlank()) {
-                    _errorMessage.value = "يرجى إدخال اسم الباقة"
-                    return@launch
+                val existingPackage = repository.getPackageById(id)
+                if (existingPackage != null) {
+                    val updatedPackage = existingPackage.copy(
+                        name = name.trim(),
+                        retailPrice = retailPrice,
+                        wholesalePrice = wholesalePrice,
+                        distributorPrice = distributorPrice
+                    )
+                    
+                    repository.updatePackage(updatedPackage)
+                    _errorMessage.value = null
                 }
-                
-                repository.updatePackage(package_)
-                _errorMessage.value = null
             } catch (e: Exception) {
                 _errorMessage.value = "خطأ في تحديث الباقة: ${e.message}"
             }
@@ -100,13 +115,5 @@ class PackagesViewModel(private val repository: NetworkCardsRepository) : ViewMo
     
     fun clearError() {
         _errorMessage.value = null
-    }
-    
-    fun formatPrice(price: Double?): String {
-        return if (price != null && price > 0) {
-            repository.formatNumber(price)
-        } else {
-            "-"
-        }
     }
 }
