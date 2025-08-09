@@ -110,6 +110,28 @@
     <string name="delete_store_message">هل أنت متأكد من حذف المحل %s؟</string>
     <string name="store_deleted">تم حذف المحل بنجاح</string>
     
+    <!-- Expenses Section -->
+    <string name="expenses_title">المصروفات</string>
+    <string name="expenses_description">إدارة المصروفات والنفقات المختلفة</string>
+    <string name="add_expense">إضافة مصروف جديد</string>
+    <string name="edit_expense">تعديل المصروف</string>
+    <string name="expense_type_hint">نوع المصروف</string>
+    <string name="expense_amount_hint">المبلغ</string>
+    <string name="expense_notes_hint">ملاحظات المصروف</string>
+    <string name="expense_date_hint">تاريخ المصروف</string>
+    <string name="expense_type_required">يرجى إدخال نوع المصروف</string>
+    <string name="expense_amount_required">يرجى إدخال المبلغ</string>
+    <string name="expense_notes_required">يرجى إدخال ملاحظات المصروف</string>
+    <string name="invalid_amount">مبلغ غير صحيح</string>
+    <string name="amount_must_be_positive">يجب أن يكون المبلغ أكبر من صفر</string>
+    <string name="no_expenses">لا توجد مصروفات</string>
+    <string name="add_first_expense">أضف أول مصروف للبدء</string>
+    <string name="loading_expenses">جاري تحميل المصروفات...</string>
+    <string name="delete_expense_title">حذف المصروف</string>
+    <string name="delete_expense_message">هل أنت متأكد من حذف المصروف %s؟</string>
+    <string name="expense_deleted">تم حذف المصروف بنجاح</string>
+    <string name="add_later">إضافة لاحقاً</string>
+    
     <!-- About Section -->
     <string name="developer_name">أحمد محمد</string>
     <string name="developer_phone">+965 12345678</string>
