@@ -562,4 +562,126 @@ class ExportUtils(private val context: Context) {
         
         return jsonObject.toString()
     }
+
+    // Expenses Export Functions
+    fun exportExpensesToPdf(context: Context, expensesList: List<Expense>) {
+        val fileName = "expenses_${getCurrentDate()}.pdf"
+        val file = File(context.getExternalFilesDir(null), fileName)
+        
+        try {
+            val document = Document()
+            PdfWriter.getInstance(document, FileOutputStream(file))
+            document.open()
+            
+            // Add Arabic font
+            val font = BaseFont.createFont("assets/fonts/arabic_font.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
+            val arabicFont = Font(font, 12f)
+            val titleFont = Font(font, 18f, Font.BOLD)
+            
+            // Title
+            val title = Paragraph("تقرير المصروفات", titleFont)
+            title.alignment = Element.ALIGN_CENTER
+            document.add(title)
+            document.add(Paragraph(" ", arabicFont))
+            
+            // Table
+            val table = PdfPTable(5)
+            table.widthPercentage = 100f
+            
+            // Headers
+            val headers = arrayOf("نوع المصروف", "المبلغ", "الملاحظات", "التاريخ", "الرقم")
+            headers.forEach { header ->
+                val cell = PdfPCell(Phrase(header, arabicFont))
+                cell.horizontalAlignment = Element.ALIGN_CENTER
+                cell.backgroundColor = BaseColor.LIGHT_GRAY
+                table.addCell(cell)
+            }
+            
+            // Data
+            expensesList.forEachIndexed { index, expense ->
+                table.addCell(PdfPCell(Phrase(expense.type, arabicFont)))
+                table.addCell(PdfPCell(Phrase(formatPrice(expense.amount), arabicFont)))
+                table.addCell(PdfPCell(Phrase(expense.notes, arabicFont)))
+                table.addCell(PdfPCell(Phrase(expense.date, arabicFont)))
+                table.addCell(PdfPCell(Phrase((index + 1).toString(), arabicFont)))
+            }
+            
+            document.add(table)
+            document.add(Paragraph(" ", arabicFont))
+            
+            // Summary
+            val totalAmount = expensesList.sumOf { it.amount }
+            val summary = Paragraph("إجمالي المصروفات: ${formatPrice(totalAmount)}", arabicFont)
+            summary.alignment = Element.ALIGN_LEFT
+            document.add(summary)
+            
+            document.close()
+            
+        } catch (e: Exception) {
+            throw Exception("خطأ في إنشاء ملف PDF: ${e.message}")
+        }
+    }
+
+    fun exportExpensesToExcel(context: Context, expensesList: List<Expense>) {
+        val fileName = "expenses_${getCurrentDate()}.xlsx"
+        val file = File(context.getExternalFilesDir(null), fileName)
+        
+        try {
+            val workbook = XSSFWorkbook()
+            val sheet = workbook.createSheet("المصروفات")
+            
+            // Create header row
+            val headerRow = sheet.createRow(0)
+            val headers = arrayOf("نوع المصروف", "المبلغ", "الملاحظات", "التاريخ", "الرقم")
+            headers.forEachIndexed { index, header ->
+                val cell = headerRow.createCell(index)
+                cell.setCellValue(header)
+            }
+            
+            // Add data rows
+            expensesList.forEachIndexed { index, expense ->
+                val row = sheet.createRow(index + 1)
+                row.createCell(0).setCellValue(expense.type)
+                row.createCell(1).setCellValue(formatPrice(expense.amount))
+                row.createCell(2).setCellValue(expense.notes)
+                row.createCell(3).setCellValue(expense.date)
+                row.createCell(4).setCellValue(index + 1)
+            }
+            
+            // Auto-size columns
+            (0..4).forEach { sheet.autoSizeColumn(it) }
+            
+            // Save file
+            val outputStream = FileOutputStream(file)
+            workbook.write(outputStream)
+            workbook.close()
+            outputStream.close()
+            
+        } catch (e: Exception) {
+            throw Exception("خطأ في إنشاء ملف Excel: ${e.message}")
+        }
+    }
+
+    fun exportExpensesToJson(context: Context, expensesList: List<Expense>): String {
+        val jsonObject = JSONObject()
+        val expensesArray = JSONArray()
+        
+        expensesList.forEach { expense ->
+            val expenseObject = JSONObject().apply {
+                put("id", expense.id)
+                put("type", expense.type)
+                put("amount", expense.amount)
+                put("notes", expense.notes)
+                put("date", expense.date)
+                put("addLater", expense.addLater)
+            }
+            expensesArray.put(expenseObject)
+        }
+        
+        jsonObject.put("expenses", expensesArray)
+        jsonObject.put("exportDate", getCurrentDate())
+        jsonObject.put("totalItems", expensesList.size)
+        
+        return jsonObject.toString()
+    }
 }
