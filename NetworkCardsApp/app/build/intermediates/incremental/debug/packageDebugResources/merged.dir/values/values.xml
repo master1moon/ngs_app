@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#e74c3c</color>
+    <color name="accent_light">#ff6b6b</color>
+    <color name="background">#f5f7fa</color>
+    <color name="black">#000000</color>
+    <color name="border_light">#eee</color>
+    <color name="border_primary">#2c3e50</color>
+    <color name="dark">#2C3E50</color>
+    <color name="error">#e74c3c</color>
+    <color name="error_light">#FFEBEE</color>
+    <color name="error_red">#F44336</color>
+    <color name="gradient_end">#e9ecef</color>
+    <color name="gradient_start">#f8f9fa</color>
+    <color name="gray">#757575</color>
+    <color name="info">#3498db</color>
+    <color name="info_blue">#2196F3</color>
+    <color name="info_light">#E3F2FD</color>
+    <color name="light">#ECF0F1</color>
+    <color name="light_gray">#f5f7fa</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="on_surface">#333</color>
+    <color name="primary">#2c3e50</color>
+    <color name="primary_dark">#1a2530</color>
+    <color name="primary_light">#34495e</color>
+    <color name="primary_variant">#1a2530</color>
+    <color name="secondary">#3498db</color>
+    <color name="secondary_variant">#2980b9</color>
+    <color name="shadow_light">#0D000000</color>
+    <color name="shadow_medium">#1A000000</color>
+    <color name="success">#27ae60</color>
+    <color name="success_green">#4CAF50</color>
+    <color name="success_light">#E8F5E8</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_muted">#777</color>
+    <color name="text_primary">#333</color>
+    <color name="text_secondary">#6c757d</color>
+    <color name="warning">#f39c12</color>
+    <color name="warning_orange">#FF9800</color>
+    <color name="whatsapp_green">#25D366</color>
+    <color name="white">#FFFFFF</color>
+    <string name="about_title">حول التطبيق</string>
+    <string name="add">إضافة</string>
+    <string name="app_name">نظام بيع الكروت والمصروفات</string>
+    <string name="app_version">الإصدار 1.2</string>
+    <string name="cancel">إلغاء</string>
+    <string name="confirm">تأكيد</string>
+    <string name="dashboard_title">لوحة التحكم</string>
+    <string name="delete">حذف</string>
+    <string name="edit">تعديل</string>
+    <string name="error">خطأ</string>
+    <string name="expenses_title">المصروفات</string>
+    <string name="export_excel">تصدير Excel</string>
+    <string name="export_json">تصدير JSON</string>
+    <string name="export_pdf">تصدير PDF</string>
+    <string name="ic_add">إضافة</string>
+    <string name="ic_dashboard">لوحة التحكم</string>
+    <string name="ic_expense">مصروف</string>
+    <string name="ic_export">تصدير</string>
+    <string name="ic_info">معلومات</string>
+    <string name="ic_inventory">مخزون</string>
+    <string name="ic_menu">قائمة</string>
+    <string name="ic_network">شبكة</string>
+    <string name="ic_package">باقة</string>
+    <string name="ic_payment">دفع</string>
+    <string name="ic_report">تقرير</string>
+    <string name="ic_sale">بيع</string>
+    <string name="ic_store">محل</string>
+    <string name="import_export_title">استيراد/تصدير</string>
+    <string name="inventory_title">كمية الكروت</string>
+    <string name="loading">جاري التحميل...</string>
+    <string name="no_packages_found">لا توجد باقات</string>
+    <string name="package_description">الوصف</string>
+    <string name="package_name">اسم الباقة</string>
+    <string name="package_price">السعر</string>
+    <string name="packages_description">إدارة باقات الكروت المتاحة</string>
+    <string name="packages_title">الباقات</string>
+    <string name="payments_title">المدفوعات</string>
+    <string name="reports_title">التقارير</string>
+    <string name="sales_title">المبيعات</string>
+    <string name="save">حفظ</string>
+    <string name="stores_title">المحلات</string>
+    <string name="success">نجح</string>
+    <style name="Theme.NetworkCardsApp" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_variant</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        
+        <item name="android:statusBarColor">@color/primary_dark</item>
+        
+        <item name="android:windowBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorError">@color/error_red</item>
+        <item name="colorOnError">@color/white</item>
+        
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:textDirection">rtl</item>
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+    <style name="Theme.NetworkCardsApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Theme.NetworkCardsApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+</resources>

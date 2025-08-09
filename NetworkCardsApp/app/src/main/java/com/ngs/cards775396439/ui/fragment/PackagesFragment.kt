@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.ngs.cards775396439.data.AppDatabase
 import com.ngs.cards775396439.data.entity.Package
-import com.ngs.cards775396439.data.repository.NetworkCardsRepository
 import com.ngs.cards775396439.databinding.FragmentPackagesBinding
 import com.ngs.cards775396439.ui.adapter.PackagesAdapter
 import com.ngs.cards775396439.ui.dialog.PackageDialogFragment
 import com.ngs.cards775396439.ui.viewmodel.PackagesViewModel
+import kotlinx.coroutines.launch
 
 class PackagesFragment : Fragment() {
     
@@ -36,21 +36,14 @@ class PackagesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
-        setupRepository()
+        setupViewModel()
         setupRecyclerView()
         setupObservers()
         setupClickListeners()
     }
     
-    private fun setupRepository() {
-        val database = AppDatabase.getDatabase(requireContext())
-        val repository = NetworkCardsRepository(database)
-        
-        viewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
-            override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
-                return PackagesViewModel(repository) as T
-            }
-        })[PackagesViewModel::class.java]
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(this)[PackagesViewModel::class.java]
     }
     
     private fun setupRecyclerView() {
@@ -66,20 +59,25 @@ class PackagesFragment : Fragment() {
     }
     
     private fun setupObservers() {
-        viewModel.packages.observe(viewLifecycleOwner) { packages ->
-            adapter.updatePackages(packages)
-            updateEmptyState(packages.isEmpty())
+        lifecycleScope.launch {
+            viewModel.packages.collect { packages ->
+                adapter.updatePackages(packages)
+                updateEmptyState(packages.isEmpty())
+            }
         }
         
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+            }
         }
         
-        viewModel.errorMessage.observe(viewLifecycleOwner) { error ->
-            error?.let {
-                // Show error message
-                showErrorDialog(it)
-                viewModel.clearError()
+        lifecycleScope.launch {
+            viewModel.errorMessage.collect { error ->
+                error?.let {
+                    showErrorDialog(it)
+                    viewModel.clearError()
+                }
             }
         }
     }

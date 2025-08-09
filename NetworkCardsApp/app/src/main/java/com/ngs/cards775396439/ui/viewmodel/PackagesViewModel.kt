@@ -3,7 +3,6 @@ package com.ngs.cards775396439.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ngs.cards775396439.data.entity.Package
-import com.ngs.cards775396439.data.repository.NetworkCardsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,7 +10,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PackagesViewModel(private val repository: NetworkCardsRepository) : ViewModel() {
+class PackagesViewModel : ViewModel() {
     
     private val _packages = MutableStateFlow<List<Package>>(emptyList())
     val packages: StateFlow<List<Package>> = _packages.asStateFlow()
@@ -30,9 +29,9 @@ class PackagesViewModel(private val repository: NetworkCardsRepository) : ViewMo
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                repository.getAllPackages().collect { packages ->
-                    _packages.value = packages
-                }
+                // Simulate loading
+                kotlinx.coroutines.delay(1000)
+                _packages.value = emptyList()
             } catch (e: Exception) {
                 _errorMessage.value = e.message
             } finally {
@@ -56,7 +55,9 @@ class PackagesViewModel(private val repository: NetworkCardsRepository) : ViewMo
                     createdAt = today
                 )
                 
-                repository.insertPackage(package_)
+                val currentList = _packages.value.toMutableList()
+                currentList.add(0, package_)
+                _packages.value = currentList
             } catch (e: Exception) {
                 _errorMessage.value = e.message
             }
@@ -66,7 +67,12 @@ class PackagesViewModel(private val repository: NetworkCardsRepository) : ViewMo
     fun updatePackage(package_: Package) {
         viewModelScope.launch {
             try {
-                repository.updatePackage(package_)
+                val currentList = _packages.value.toMutableList()
+                val index = currentList.indexOfFirst { it.id == package_.id }
+                if (index != -1) {
+                    currentList[index] = package_
+                    _packages.value = currentList
+                }
             } catch (e: Exception) {
                 _errorMessage.value = e.message
             }
@@ -76,7 +82,9 @@ class PackagesViewModel(private val repository: NetworkCardsRepository) : ViewMo
     fun deletePackage(package_: Package) {
         viewModelScope.launch {
             try {
-                repository.deletePackage(package_)
+                val currentList = _packages.value.toMutableList()
+                currentList.removeAll { it.id == package_.id }
+                _packages.value = currentList
             } catch (e: Exception) {
                 _errorMessage.value = e.message
             }

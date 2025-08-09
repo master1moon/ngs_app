@@ -31,4 +31,11 @@ object EditTextUtils {
     fun setNumericValue(editText: EditText, value: Double) {
         editText.setText(NumberFormatTextWatcher.formatNumber(value.toLong()))
     }
+
+    /**
+     * تنسيق رقم مع فواصل
+     */
+    fun formatNumber(number: Long): String {
+        return NumberFormatTextWatcher.formatNumber(number)
+    }
 }
