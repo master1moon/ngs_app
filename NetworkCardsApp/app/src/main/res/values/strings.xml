@@ -9,6 +9,7 @@
     <string name="stores">البقالات والمحلات</string>
     <string name="expenses">المصروفات</string>
     <string name="reports">التقارير</string>
+    <string name="import_export">الاستيراد والتصدير</string>
     
     <!-- Dashboard -->
     <string name="quick_stats">إحصائيات سريعة</string>
