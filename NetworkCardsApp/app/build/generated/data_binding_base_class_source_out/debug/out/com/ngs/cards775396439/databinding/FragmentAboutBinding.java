@@ -4,9 +4,9 @@ package com.ngs.cards775396439.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.viewbinding.ViewBinding;
 import com.ngs.cards775396439.R;
 import java.lang.NullPointerException;
@@ -14,15 +14,15 @@ import java.lang.Override;
 
 public final class FragmentAboutBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final NestedScrollView rootView;
 
-  private FragmentAboutBinding(@NonNull LinearLayout rootView) {
+  private FragmentAboutBinding(@NonNull NestedScrollView rootView) {
     this.rootView = rootView;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public NestedScrollView getRoot() {
     return rootView;
   }
 
@@ -47,6 +47,6 @@ public final class FragmentAboutBinding implements ViewBinding {
       throw new NullPointerException("rootView");
     }
 
-    return new FragmentAboutBinding((LinearLayout) rootView);
+    return new FragmentAboutBinding((NestedScrollView) rootView);
   }
 }

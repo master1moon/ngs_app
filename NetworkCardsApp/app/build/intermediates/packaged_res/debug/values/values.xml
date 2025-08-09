@@ -44,11 +44,13 @@
     <string name="add">إضافة</string>
     <string name="app_name">نظام بيع الكروت والمصروفات</string>
     <string name="app_version">الإصدار 1.2</string>
+    <string name="call">اتصال</string>
     <string name="cancel">إلغاء</string>
     <string name="confirm">تأكيد</string>
     <string name="dashboard_title">لوحة التحكم</string>
     <string name="delete">حذف</string>
     <string name="edit">تعديل</string>
+    <string name="email">البريد الإلكتروني</string>
     <string name="error">خطأ</string>
     <string name="expenses_title">المصروفات</string>
     <string name="export_excel">تصدير Excel</string>
@@ -70,7 +72,10 @@
     <string name="import_export_title">استيراد/تصدير</string>
     <string name="inventory_title">كمية الكروت</string>
     <string name="loading">جاري التحميل...</string>
+    <string name="no_expenses_found">لا توجد مصروفات مسجلة</string>
     <string name="no_packages_found">لا توجد باقات</string>
+    <string name="no_payments_found">لا توجد مدفوعات مسجلة</string>
+    <string name="no_sales_found">لا توجد مبيعات مسجلة</string>
     <string name="no_stores_found">لا توجد محلات مسجلة</string>
     <string name="package_description">الوصف</string>
     <string name="package_name">اسم الباقة</string>
@@ -83,6 +88,7 @@
     <string name="save">حفظ</string>
     <string name="stores_title">المحلات</string>
     <string name="success">نجح</string>
+    <string name="whatsapp">واتساب</string>
     <style name="Theme.NetworkCardsApp" parent="Theme.Material3.DayNight.NoActionBar">
         
         <item name="colorPrimary">@color/primary</item>

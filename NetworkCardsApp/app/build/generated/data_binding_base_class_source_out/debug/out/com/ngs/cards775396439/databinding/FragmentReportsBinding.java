@@ -4,25 +4,71 @@ package com.ngs.cards775396439.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.ngs.cards775396439.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class FragmentReportsBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final NestedScrollView rootView;
 
-  private FragmentReportsBinding(@NonNull LinearLayout rootView) {
+  @NonNull
+  public final MaterialButton btnExportExcel;
+
+  @NonNull
+  public final MaterialButton btnExportPDF;
+
+  @NonNull
+  public final MaterialButton btnGenerateReport;
+
+  @NonNull
+  public final TextInputEditText etFromDate;
+
+  @NonNull
+  public final TextInputEditText etToDate;
+
+  @NonNull
+  public final TextView tvNetProfit;
+
+  @NonNull
+  public final TextView tvTotalExpenses;
+
+  @NonNull
+  public final TextView tvTotalPayments;
+
+  @NonNull
+  public final TextView tvTotalSales;
+
+  private FragmentReportsBinding(@NonNull NestedScrollView rootView,
+      @NonNull MaterialButton btnExportExcel, @NonNull MaterialButton btnExportPDF,
+      @NonNull MaterialButton btnGenerateReport, @NonNull TextInputEditText etFromDate,
+      @NonNull TextInputEditText etToDate, @NonNull TextView tvNetProfit,
+      @NonNull TextView tvTotalExpenses, @NonNull TextView tvTotalPayments,
+      @NonNull TextView tvTotalSales) {
     this.rootView = rootView;
+    this.btnExportExcel = btnExportExcel;
+    this.btnExportPDF = btnExportPDF;
+    this.btnGenerateReport = btnGenerateReport;
+    this.etFromDate = etFromDate;
+    this.etToDate = etToDate;
+    this.tvNetProfit = tvNetProfit;
+    this.tvTotalExpenses = tvTotalExpenses;
+    this.tvTotalPayments = tvTotalPayments;
+    this.tvTotalSales = tvTotalSales;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public NestedScrollView getRoot() {
     return rootView;
   }
 
@@ -43,10 +89,69 @@ public final class FragmentReportsBinding implements ViewBinding {
 
   @NonNull
   public static FragmentReportsBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
-    }
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.btnExportExcel;
+      MaterialButton btnExportExcel = ViewBindings.findChildViewById(rootView, id);
+      if (btnExportExcel == null) {
+        break missingId;
+      }
 
-    return new FragmentReportsBinding((LinearLayout) rootView);
+      id = R.id.btnExportPDF;
+      MaterialButton btnExportPDF = ViewBindings.findChildViewById(rootView, id);
+      if (btnExportPDF == null) {
+        break missingId;
+      }
+
+      id = R.id.btnGenerateReport;
+      MaterialButton btnGenerateReport = ViewBindings.findChildViewById(rootView, id);
+      if (btnGenerateReport == null) {
+        break missingId;
+      }
+
+      id = R.id.etFromDate;
+      TextInputEditText etFromDate = ViewBindings.findChildViewById(rootView, id);
+      if (etFromDate == null) {
+        break missingId;
+      }
+
+      id = R.id.etToDate;
+      TextInputEditText etToDate = ViewBindings.findChildViewById(rootView, id);
+      if (etToDate == null) {
+        break missingId;
+      }
+
+      id = R.id.tvNetProfit;
+      TextView tvNetProfit = ViewBindings.findChildViewById(rootView, id);
+      if (tvNetProfit == null) {
+        break missingId;
+      }
+
+      id = R.id.tvTotalExpenses;
+      TextView tvTotalExpenses = ViewBindings.findChildViewById(rootView, id);
+      if (tvTotalExpenses == null) {
+        break missingId;
+      }
+
+      id = R.id.tvTotalPayments;
+      TextView tvTotalPayments = ViewBindings.findChildViewById(rootView, id);
+      if (tvTotalPayments == null) {
+        break missingId;
+      }
+
+      id = R.id.tvTotalSales;
+      TextView tvTotalSales = ViewBindings.findChildViewById(rootView, id);
+      if (tvTotalSales == null) {
+        break missingId;
+      }
+
+      return new FragmentReportsBinding((NestedScrollView) rootView, btnExportExcel, btnExportPDF,
+          btnGenerateReport, etFromDate, etToDate, tvNetProfit, tvTotalExpenses, tvTotalPayments,
+          tvTotalSales);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }

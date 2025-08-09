@@ -4,25 +4,64 @@ package com.ngs.cards775396439.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import com.google.android.material.button.MaterialButton;
 import com.ngs.cards775396439.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class FragmentImportexportBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final NestedScrollView rootView;
 
-  private FragmentImportexportBinding(@NonNull LinearLayout rootView) {
+  @NonNull
+  public final MaterialButton btnBackup;
+
+  @NonNull
+  public final MaterialButton btnExportExcel;
+
+  @NonNull
+  public final MaterialButton btnExportJSON;
+
+  @NonNull
+  public final MaterialButton btnExportPDF;
+
+  @NonNull
+  public final MaterialButton btnImportCSV;
+
+  @NonNull
+  public final MaterialButton btnImportExcel;
+
+  @NonNull
+  public final MaterialButton btnImportJSON;
+
+  @NonNull
+  public final MaterialButton btnRestore;
+
+  private FragmentImportexportBinding(@NonNull NestedScrollView rootView,
+      @NonNull MaterialButton btnBackup, @NonNull MaterialButton btnExportExcel,
+      @NonNull MaterialButton btnExportJSON, @NonNull MaterialButton btnExportPDF,
+      @NonNull MaterialButton btnImportCSV, @NonNull MaterialButton btnImportExcel,
+      @NonNull MaterialButton btnImportJSON, @NonNull MaterialButton btnRestore) {
     this.rootView = rootView;
+    this.btnBackup = btnBackup;
+    this.btnExportExcel = btnExportExcel;
+    this.btnExportJSON = btnExportJSON;
+    this.btnExportPDF = btnExportPDF;
+    this.btnImportCSV = btnImportCSV;
+    this.btnImportExcel = btnImportExcel;
+    this.btnImportJSON = btnImportJSON;
+    this.btnRestore = btnRestore;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public NestedScrollView getRoot() {
     return rootView;
   }
 
@@ -43,10 +82,62 @@ public final class FragmentImportexportBinding implements ViewBinding {
 
   @NonNull
   public static FragmentImportexportBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
-    }
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.btnBackup;
+      MaterialButton btnBackup = ViewBindings.findChildViewById(rootView, id);
+      if (btnBackup == null) {
+        break missingId;
+      }
 
-    return new FragmentImportexportBinding((LinearLayout) rootView);
+      id = R.id.btnExportExcel;
+      MaterialButton btnExportExcel = ViewBindings.findChildViewById(rootView, id);
+      if (btnExportExcel == null) {
+        break missingId;
+      }
+
+      id = R.id.btnExportJSON;
+      MaterialButton btnExportJSON = ViewBindings.findChildViewById(rootView, id);
+      if (btnExportJSON == null) {
+        break missingId;
+      }
+
+      id = R.id.btnExportPDF;
+      MaterialButton btnExportPDF = ViewBindings.findChildViewById(rootView, id);
+      if (btnExportPDF == null) {
+        break missingId;
+      }
+
+      id = R.id.btnImportCSV;
+      MaterialButton btnImportCSV = ViewBindings.findChildViewById(rootView, id);
+      if (btnImportCSV == null) {
+        break missingId;
+      }
+
+      id = R.id.btnImportExcel;
+      MaterialButton btnImportExcel = ViewBindings.findChildViewById(rootView, id);
+      if (btnImportExcel == null) {
+        break missingId;
+      }
+
+      id = R.id.btnImportJSON;
+      MaterialButton btnImportJSON = ViewBindings.findChildViewById(rootView, id);
+      if (btnImportJSON == null) {
+        break missingId;
+      }
+
+      id = R.id.btnRestore;
+      MaterialButton btnRestore = ViewBindings.findChildViewById(rootView, id);
+      if (btnRestore == null) {
+        break missingId;
+      }
+
+      return new FragmentImportexportBinding((NestedScrollView) rootView, btnBackup, btnExportExcel,
+          btnExportJSON, btnExportPDF, btnImportCSV, btnImportExcel, btnImportJSON, btnRestore);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }
