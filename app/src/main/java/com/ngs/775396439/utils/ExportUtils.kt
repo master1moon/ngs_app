@@ -921,4 +921,134 @@ class ExportUtils(private val context: Context) {
         
         return jsonObject.toString()
     }
+
+    // Sales Export Functions
+    fun exportSalesToPdf(context: Context, sales: List<Sale>) {
+        val fileName = "sales_${getCurrentDate()}.pdf"
+        val file = File(context.getExternalFilesDir(null), fileName)
+        
+        try {
+            val document = Document()
+            PdfWriter.getInstance(document, FileOutputStream(file))
+            document.open()
+            
+            // Add Arabic font
+            val font = BaseFont.createFont("assets/fonts/arabic_font.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
+            val arabicFont = Font(font, 12f)
+            val titleFont = Font(font, 18f, Font.BOLD)
+            val subtitleFont = Font(font, 14f, Font.BOLD)
+            
+            // Title
+            val title = Paragraph("تقرير المبيعات", titleFont)
+            title.alignment = Element.ALIGN_CENTER
+            document.add(title)
+            document.add(Paragraph(" ", arabicFont))
+            
+            // Sales Table
+            val salesTable = PdfPTable(6)
+            salesTable.widthPercentage = 100f
+            
+            val salesHeaders = arrayOf("المحل", "الباقة", "السبب", "الكمية", "المبلغ", "التاريخ")
+            salesHeaders.forEach { header ->
+                val cell = PdfPCell(Phrase(header, arabicFont))
+                cell.horizontalAlignment = Element.ALIGN_CENTER
+                cell.backgroundColor = BaseColor.LIGHT_GRAY
+                salesTable.addCell(cell)
+            }
+            
+            sales.forEach { sale ->
+                salesTable.addCell(PdfPCell(Phrase(sale.storeId, arabicFont)))
+                salesTable.addCell(PdfPCell(Phrase(sale.packageId, arabicFont)))
+                salesTable.addCell(PdfPCell(Phrase(sale.reason, arabicFont)))
+                salesTable.addCell(PdfPCell(Phrase(sale.quantity.toString(), arabicFont)))
+                salesTable.addCell(PdfPCell(Phrase(formatPrice(sale.total), arabicFont)))
+                salesTable.addCell(PdfPCell(Phrase(sale.date, arabicFont)))
+            }
+            
+            document.add(salesTable)
+            
+            // Summary
+            val totalSales = sales.sumOf { it.total }
+            val totalQuantity = sales.sumOf { it.quantity }
+            
+            document.add(Paragraph(" ", arabicFont))
+            document.add(Paragraph("الملخص:", subtitleFont))
+            document.add(Paragraph("إجمالي المبيعات: ${formatPrice(totalSales)}", arabicFont))
+            document.add(Paragraph("إجمالي الكمية: $totalQuantity", arabicFont))
+            document.add(Paragraph("عدد العمليات: ${sales.size}", arabicFont))
+            
+            document.close()
+            
+        } catch (e: Exception) {
+            throw Exception("خطأ في إنشاء ملف PDF: ${e.message}")
+        }
+    }
+
+    fun exportSalesToExcel(context: Context, sales: List<Sale>) {
+        val fileName = "sales_${getCurrentDate()}.xlsx"
+        val file = File(context.getExternalFilesDir(null), fileName)
+        
+        try {
+            val workbook = XSSFWorkbook()
+            val sheet = workbook.createSheet("المبيعات")
+            
+            val headers = arrayOf("المحل", "الباقة", "السبب", "الكمية", "المبلغ", "التاريخ")
+            val headerRow = sheet.createRow(0)
+            headers.forEachIndexed { index, header ->
+                val cell = headerRow.createCell(index)
+                cell.setCellValue(header)
+            }
+            
+            sales.forEachIndexed { index, sale ->
+                val row = sheet.createRow(index + 1)
+                row.createCell(0).setCellValue(sale.storeId)
+                row.createCell(1).setCellValue(sale.packageId)
+                row.createCell(2).setCellValue(sale.reason)
+                row.createCell(3).setCellValue(sale.quantity)
+                row.createCell(4).setCellValue(formatPrice(sale.total))
+                row.createCell(5).setCellValue(sale.date)
+            }
+            
+            // Auto-size columns
+            (0..5).forEach { sheet.autoSizeColumn(it) }
+            
+            // Save file
+            val outputStream = FileOutputStream(file)
+            workbook.write(outputStream)
+            workbook.close()
+            outputStream.close()
+            
+        } catch (e: Exception) {
+            throw Exception("خطأ في إنشاء ملف Excel: ${e.message}")
+        }
+    }
+
+    fun exportSalesToJson(context: Context, sales: List<Sale>): String {
+        val jsonObject = JSONObject()
+        
+        // Sales array
+        val salesArray = JSONArray()
+        sales.forEach { sale ->
+            val saleObject = JSONObject().apply {
+                put("id", sale.id)
+                put("storeId", sale.storeId)
+                put("packageId", sale.packageId)
+                put("reason", sale.reason)
+                put("quantity", sale.quantity)
+                put("amount", sale.amount)
+                put("pricePerUnit", sale.pricePerUnit)
+                put("total", sale.total)
+                put("date", sale.date)
+            }
+            salesArray.put(saleObject)
+        }
+        
+        jsonObject.put("sales", salesArray)
+        jsonObject.put("exportDate", getCurrentDate())
+        jsonObject.put("totalSales", sales.size)
+        jsonObject.put("totalAmount", sales.sumOf { it.total })
+        jsonObject.put("totalQuantity", sales.sumOf { it.quantity })
+        
+        return jsonObject.toString()
+    }
 }
