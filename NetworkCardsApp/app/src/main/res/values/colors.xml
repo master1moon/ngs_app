@@ -48,4 +48,7 @@
     
     <!-- ألوان التواصل -->
     <color name="whatsapp_green">#25D366</color>
+    <color name="info">#2196F3</color>
+    <color name="warning">#FF9800</color>
+    <color name="error">#F44336</color>
 </resources>

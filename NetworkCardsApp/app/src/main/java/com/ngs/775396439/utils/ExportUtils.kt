@@ -14,6 +14,17 @@ import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import com.itextpdf.text.Document
+import com.itextpdf.text.pdf.PdfWriter
+import com.itextpdf.text.pdf.PdfPCell
+import com.itextpdf.text.Phrase
+import com.itextpdf.text.Element
+import com.itextpdf.text.pdf.PdfPTable
+import com.itextpdf.text.pdf.BaseColor
+import com.itextpdf.text.pdf.BaseFont
+import com.itextpdf.text.Paragraph
+import org.json.JSONObject
+import org.json.JSONArray
 
 class ExportUtils(private val context: Context) {
 
@@ -335,7 +346,21 @@ class ExportUtils(private val context: Context) {
 
     // دوال مساعدة أخرى (مبسطة)
     private fun drawStoresData(canvas: android.graphics.Canvas, stores: List<Store>, startY: Float, headerPaint: android.graphics.Paint, normalPaint: android.graphics.Paint, smallPaint: android.graphics.Paint) {
-        // تنفيذ مشابه للبيانات الأخرى
+        var yPosition = startY
+
+        // رسم العناوين
+        canvas.drawText("اسم المحل", 500f, yPosition, headerPaint)
+        canvas.drawText("نوع السعر", 400f, yPosition, headerPaint)
+        canvas.drawText("تاريخ الإنشاء", 200f, yPosition, headerPaint)
+        yPosition += 30f
+
+        // رسم البيانات
+        stores.forEach { store ->
+            canvas.drawText(store.name, 500f, yPosition, normalPaint)
+            canvas.drawText(getPriceTypeDisplayName(store.priceType), 400f, yPosition, normalPaint)
+            canvas.drawText(store.createdAt, 200f, yPosition, smallPaint)
+            yPosition += 25f
+        }
     }
 
     private fun drawExpensesData(canvas: android.graphics.Canvas, expenses: List<Expense>, startY: Float, headerPaint: android.graphics.Paint, normalPaint: android.graphics.Paint, smallPaint: android.graphics.Paint) {
@@ -351,7 +376,21 @@ class ExportUtils(private val context: Context) {
     }
 
     private fun addStoresToExcel(sheet: org.apache.poi.ss.usermodel.Sheet, stores: List<Store>, startRow: Int, headerStyle: CellStyle, normalStyle: CellStyle) {
-        // تنفيذ مشابه للبيانات الأخرى
+        var rowIndex = startRow
+
+        // إضافة العناوين
+        val headerRow = sheet.createRow(rowIndex++)
+        headerRow.createCell(0).apply { setCellValue("اسم المحل"); cellStyle = headerStyle }
+        headerRow.createCell(1).apply { setCellValue("نوع السعر"); cellStyle = headerStyle }
+        headerRow.createCell(2).apply { setCellValue("تاريخ الإنشاء"); cellStyle = headerStyle }
+
+        // إضافة البيانات
+        stores.forEach { store ->
+            val dataRow = sheet.createRow(rowIndex++)
+            dataRow.createCell(0).apply { setCellValue(store.name); cellStyle = normalStyle }
+            dataRow.createCell(1).apply { setCellValue(getPriceTypeDisplayName(store.priceType)); cellStyle = normalStyle }
+            dataRow.createCell(2).apply { setCellValue(store.createdAt); cellStyle = normalStyle }
+        }
     }
 
     private fun addExpensesToExcel(sheet: org.apache.poi.ss.usermodel.Sheet, expenses: List<Expense>, startRow: Int, headerStyle: CellStyle, normalStyle: CellStyle) {
@@ -396,5 +435,131 @@ class ExportUtils(private val context: Context) {
         } else {
             "0"
         }
+    }
+
+    private fun getPriceTypeDisplayName(priceType: String): String {
+        return when (priceType) {
+            "retail" -> "تجزئة"
+            "wholesale" -> "جملة"
+            "distributor" -> "موزعين"
+            else -> "غير محدد"
+        }
+    }
+
+    // Stores Export Functions
+    fun exportStoresToPdf(context: Context, storesList: List<Store>) {
+        val fileName = "stores_${getCurrentDate()}.pdf"
+        val file = File(context.getExternalFilesDir(null), fileName)
+        
+        try {
+            val document = Document()
+            PdfWriter.getInstance(document, FileOutputStream(file))
+            document.open()
+            
+            // Add Arabic font
+            val font = BaseFont.createFont("assets/fonts/arabic_font.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
+            val arabicFont = Font(font, 12f)
+            val titleFont = Font(font, 18f, Font.BOLD)
+            
+            // Title
+            val title = Paragraph("تقرير المحلات", titleFont)
+            title.alignment = Element.ALIGN_CENTER
+            document.add(title)
+            document.add(Paragraph(" ", arabicFont))
+            
+            // Table
+            val table = PdfPTable(4)
+            table.widthPercentage = 100f
+            
+            // Headers
+            val headers = arrayOf("اسم المحل", "نوع السعر", "تاريخ الإنشاء", "الرقم")
+            headers.forEach { header ->
+                val cell = PdfPCell(Phrase(header, arabicFont))
+                cell.horizontalAlignment = Element.ALIGN_CENTER
+                cell.backgroundColor = BaseColor.LIGHT_GRAY
+                table.addCell(cell)
+            }
+            
+            // Data
+            storesList.forEachIndexed { index, store ->
+                table.addCell(PdfPCell(Phrase(store.name, arabicFont)))
+                table.addCell(PdfPCell(Phrase(getPriceTypeDisplayName(store.priceType), arabicFont)))
+                table.addCell(PdfPCell(Phrase(store.createdAt, arabicFont)))
+                table.addCell(PdfPCell(Phrase((index + 1).toString(), arabicFont)))
+            }
+            
+            document.add(table)
+            document.add(Paragraph(" ", arabicFont))
+            
+            // Summary
+            val summary = Paragraph("إجمالي المحلات: ${storesList.size}", arabicFont)
+            summary.alignment = Element.ALIGN_LEFT
+            document.add(summary)
+            
+            document.close()
+            
+        } catch (e: Exception) {
+            throw Exception("خطأ في إنشاء ملف PDF: ${e.message}")
+        }
+    }
+
+    fun exportStoresToExcel(context: Context, storesList: List<Store>) {
+        val fileName = "stores_${getCurrentDate()}.xlsx"
+        val file = File(context.getExternalFilesDir(null), fileName)
+        
+        try {
+            val workbook = XSSFWorkbook()
+            val sheet = workbook.createSheet("المحلات")
+            
+            // Create header row
+            val headerRow = sheet.createRow(0)
+            val headers = arrayOf("اسم المحل", "نوع السعر", "تاريخ الإنشاء", "الرقم")
+            headers.forEachIndexed { index, header ->
+                val cell = headerRow.createCell(index)
+                cell.setCellValue(header)
+            }
+            
+            // Add data rows
+            storesList.forEachIndexed { index, store ->
+                val row = sheet.createRow(index + 1)
+                row.createCell(0).setCellValue(store.name)
+                row.createCell(1).setCellValue(getPriceTypeDisplayName(store.priceType))
+                row.createCell(2).setCellValue(store.createdAt)
+                row.createCell(3).setCellValue(index + 1)
+            }
+            
+            // Auto-size columns
+            (0..3).forEach { sheet.autoSizeColumn(it) }
+            
+            // Save file
+            val outputStream = FileOutputStream(file)
+            workbook.write(outputStream)
+            workbook.close()
+            outputStream.close()
+            
+        } catch (e: Exception) {
+            throw Exception("خطأ في إنشاء ملف Excel: ${e.message}")
+        }
+    }
+
+    fun exportStoresToJson(context: Context, storesList: List<Store>): String {
+        val jsonObject = JSONObject()
+        val storesArray = JSONArray()
+        
+        storesList.forEach { store ->
+            val storeObject = JSONObject().apply {
+                put("id", store.id)
+                put("name", store.name)
+                put("priceType", store.priceType)
+                put("createdAt", store.createdAt)
+            }
+            storesArray.put(storeObject)
+        }
+        
+        jsonObject.put("stores", storesArray)
+        jsonObject.put("exportDate", getCurrentDate())
+        jsonObject.put("totalItems", storesList.size)
+        
+        return jsonObject.toString()
     }
 }

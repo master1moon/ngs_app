@@ -35,6 +35,9 @@
     <string name="retail_price_hint">أدخل سعر التجزئة</string>
     <string name="wholesale_price_hint">أدخل سعر الجملة</string>
     <string name="distributor_price_hint">أدخل سعر الموزعين</string>
+    <string name="retail">تجزئة</string>
+    <string name="wholesale">جملة</string>
+    <string name="distributor">موزعين</string>
     
     <!-- Currency -->
     <string name="currency_symbol">د.ك</string>
@@ -90,6 +93,22 @@
     <string name="export_json_success">تم التصدير إلى JSON بنجاح</string>
     <string name="export_error">خطأ في التصدير</string>
     <string name="no_data_to_export">لا توجد بيانات للتصدير</string>
+    
+    <!-- Stores Section -->
+    <string name="stores_title">البقالات والمحلات</string>
+    <string name="stores_description">إدارة المحلات والبقالات مع أنواع الأسعار المختلفة</string>
+    <string name="add_store">إضافة محل جديد</string>
+    <string name="edit_store">تعديل المحل</string>
+    <string name="store_name_hint">اسم المحل</string>
+    <string name="price_type_hint">نوع السعر</string>
+    <string name="store_date_hint">تاريخ الإنشاء</string>
+    <string name="store_name_required">يرجى إدخال اسم المحل</string>
+    <string name="no_stores">لا توجد محلات</string>
+    <string name="add_first_store">أضف أول محل للبدء</string>
+    <string name="loading_stores">جاري تحميل المحلات...</string>
+    <string name="delete_store_title">حذف المحل</string>
+    <string name="delete_store_message">هل أنت متأكد من حذف المحل %s؟</string>
+    <string name="store_deleted">تم حذف المحل بنجاح</string>
     
     <!-- About Section -->
     <string name="developer_name">أحمد محمد</string>
