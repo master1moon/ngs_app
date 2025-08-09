@@ -8,12 +8,16 @@
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_about.xml"
     },
     {
+        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/item_package.xml",
+        "source": "com.ngs.cards775396439.app-main-55:/layout/item_package.xml"
+    },
+    {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/activity_main.xml",
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/activity_main.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_importexport.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/fragment_importexport.xml"
+        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/dialog_package.xml",
+        "source": "com.ngs.cards775396439.app-main-55:/layout/dialog_package.xml"
     },
     {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_reports.xml",
@@ -30,6 +34,10 @@
     {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_dashboard.xml",
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_dashboard.xml"
+    },
+    {
+        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_packages.xml",
+        "source": "com.ngs.cards775396439.app-main-55:/layout/fragment_packages.xml"
     },
     {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_packages.xml",
