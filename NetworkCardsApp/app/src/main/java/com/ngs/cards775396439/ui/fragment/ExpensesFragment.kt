@@ -14,6 +14,7 @@ import com.ngs.cards775396439.databinding.FragmentExpensesBinding
 import com.ngs.cards775396439.ui.adapter.ExpensesAdapter
 import com.ngs.cards775396439.ui.dialog.ExpensesDialogFragment
 import com.ngs.cards775396439.ui.viewmodel.ExpensesViewModel
+import com.ngs.cards775396439.utils.ExportUtils
 import kotlinx.coroutines.launch
 
 class ExpensesFragment : Fragment() {
@@ -86,6 +87,11 @@ class ExpensesFragment : Fragment() {
         binding.fabAddExpense.setOnClickListener {
             showAddDialog()
         }
+        
+        // إضافة زر التصدير (يمكن إضافته في layout)
+        // binding.btnExport.setOnClickListener {
+        //     showExportDialog()
+        // }
     }
     
     private fun updateEmptyState(isEmpty: Boolean) {
@@ -131,6 +137,117 @@ class ExpensesFragment : Fragment() {
     private fun showErrorDialog(message: String) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("خطأ")
+            .setMessage(message)
+            .setPositiveButton("حسناً", null)
+            .show()
+    }
+    
+    private fun showExportDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("تصدير المصروفات")
+            .setItems(arrayOf("PDF", "Excel", "JSON", "TXT")) { _, which ->
+                when (which) {
+                    0 -> exportExpensesToPDF()
+                    1 -> exportExpensesToExcel()
+                    2 -> exportExpensesToJSON()
+                    3 -> exportExpensesToTXT()
+                }
+            }
+            .show()
+    }
+    
+    private fun exportExpensesToPDF() {
+        lifecycleScope.launch {
+            viewModel.expenses.collect { expenses ->
+                val data = ExportUtils.formatExpensesForExport(expenses)
+                val columns = listOf("نوع المصروف", "المبلغ", "الملاحظات", "التاريخ", "إضافة لاحقاً")
+                
+                val file = ExportUtils.exportToPDF(
+                    requireContext(),
+                    "تقرير المصروفات",
+                    data,
+                    columns,
+                    "expenses_report"
+                )
+                
+                if (file != null) {
+                    showSuccessDialog("تم تصدير المصروفات إلى PDF بنجاح\nالملف: ${file.name}")
+                } else {
+                    showErrorDialog("فشل في تصدير الملف")
+                }
+            }
+        }
+    }
+    
+    private fun exportExpensesToExcel() {
+        lifecycleScope.launch {
+            viewModel.expenses.collect { expenses ->
+                val data = ExportUtils.formatExpensesForExport(expenses)
+                val columns = listOf("نوع المصروف", "المبلغ", "الملاحظات", "التاريخ", "إضافة لاحقاً")
+                
+                val file = ExportUtils.exportToExcel(
+                    requireContext(),
+                    "تقرير المصروفات",
+                    data,
+                    columns,
+                    "expenses_report"
+                )
+                
+                if (file != null) {
+                    showSuccessDialog("تم تصدير المصروفات إلى Excel بنجاح\nالملف: ${file.name}")
+                } else {
+                    showErrorDialog("فشل في تصدير الملف")
+                }
+            }
+        }
+    }
+    
+    private fun exportExpensesToJSON() {
+        lifecycleScope.launch {
+            viewModel.expenses.collect { expenses ->
+                val data = ExportUtils.formatExpensesForExport(expenses)
+                
+                val file = ExportUtils.exportToJSON(
+                    requireContext(),
+                    data,
+                    "expenses_report"
+                )
+                
+                if (file != null) {
+                    showSuccessDialog("تم تصدير المصروفات إلى JSON بنجاح\nالملف: ${file.name}")
+                } else {
+                    showErrorDialog("فشل في تصدير الملف")
+                }
+            }
+        }
+    }
+    
+    private fun exportExpensesToTXT() {
+        lifecycleScope.launch {
+            viewModel.expenses.collect { expenses ->
+                val data = ExportUtils.formatExpensesForExport(expenses)
+                val columns = listOf("نوع المصروف", "المبلغ", "الملاحظات", "التاريخ", "إضافة لاحقاً")
+                
+                val file = ExportUtils.exportToTXT(
+                    requireContext(),
+                    "تقرير المصروفات",
+                    data,
+                    columns,
+                    "expenses_report"
+                )
+                
+                if (file != null) {
+                    showSuccessDialog("تم تصدير المصروفات إلى TXT بنجاح\nالملف: ${file.name}")
+                } else {
+                    showErrorDialog("فشل في تصدير الملف")
+                }
+            }
+        }
+    }
+    
+    private fun showSuccessDialog(message: String) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("نجح التصدير")
             .setMessage(message)
             .setPositiveButton("حسناً", null)
             .show()

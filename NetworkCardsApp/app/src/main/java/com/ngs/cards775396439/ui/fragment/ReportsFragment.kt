@@ -11,6 +11,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ngs.cards775396439.databinding.FragmentReportsBinding
 import com.ngs.cards775396439.ui.viewmodel.ReportsViewModel
 import com.ngs.cards775396439.utils.EditTextUtils
+import com.ngs.cards775396439.utils.ExportUtils
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -147,10 +148,89 @@ class ReportsFragment : Fragment() {
             .setTitle("تصدير التقرير")
             .setMessage("سيتم تصدير التقرير بصيغة $format")
             .setPositiveButton("تصدير") { _, _ ->
-                // TODO: Implement export functionality
-                showErrorDialog("سيتم إضافة وظيفة التصدير في المرحلة التالية")
+                when (format) {
+                    "PDF" -> exportReportToPDF()
+                    "Excel" -> exportReportToExcel()
+                    else -> showErrorDialog("سيتم إضافة وظيفة التصدير في المرحلة التالية")
+                }
             }
             .setNegativeButton("إلغاء", null)
+            .show()
+    }
+    
+    private fun exportReportToPDF() {
+        val fromDate = binding.etFromDate.text.toString()
+        val toDate = binding.etToDate.text.toString()
+        
+        if (fromDate.isEmpty() || toDate.isEmpty()) {
+            showErrorDialog("يرجى إدخال الفترة الزمنية")
+            return
+        }
+        
+        val totalSales = viewModel.getTotalSales()
+        val totalPayments = viewModel.getTotalPayments()
+        val totalExpenses = viewModel.getTotalExpenses()
+        val netProfit = viewModel.getNetProfit()
+        
+        val data = ExportUtils.formatReportForExport(
+            totalSales, totalPayments, totalExpenses, netProfit, fromDate, toDate
+        )
+        val columns = listOf("الفترة", "إجمالي المبيعات", "إجمالي المدفوعات", "إجمالي المصروفات", "صافي الربح")
+        
+        val file = ExportUtils.exportToPDF(
+            requireContext(),
+            "تقرير مالي شامل",
+            data,
+            columns,
+            "financial_report"
+        )
+        
+        if (file != null) {
+            showSuccessDialog("تم تصدير التقرير إلى PDF بنجاح\nالملف: ${file.name}")
+        } else {
+            showErrorDialog("فشل في تصدير الملف")
+        }
+    }
+    
+    private fun exportReportToExcel() {
+        val fromDate = binding.etFromDate.text.toString()
+        val toDate = binding.etToDate.text.toString()
+        
+        if (fromDate.isEmpty() || toDate.isEmpty()) {
+            showErrorDialog("يرجى إدخال الفترة الزمنية")
+            return
+        }
+        
+        val totalSales = viewModel.getTotalSales()
+        val totalPayments = viewModel.getTotalPayments()
+        val totalExpenses = viewModel.getTotalExpenses()
+        val netProfit = viewModel.getNetProfit()
+        
+        val data = ExportUtils.formatReportForExport(
+            totalSales, totalPayments, totalExpenses, netProfit, fromDate, toDate
+        )
+        val columns = listOf("الفترة", "إجمالي المبيعات", "إجمالي المدفوعات", "إجمالي المصروفات", "صافي الربح")
+        
+        val file = ExportUtils.exportToExcel(
+            requireContext(),
+            "تقرير مالي شامل",
+            data,
+            columns,
+            "financial_report"
+        )
+        
+        if (file != null) {
+            showSuccessDialog("تم تصدير التقرير إلى Excel بنجاح\nالملف: ${file.name}")
+        } else {
+            showErrorDialog("فشل في تصدير الملف")
+        }
+    }
+    
+    private fun showSuccessDialog(message: String) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("نجح التصدير")
+            .setMessage(message)
+            .setPositiveButton("حسناً", null)
             .show()
     }
     

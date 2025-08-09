@@ -44,6 +44,33 @@ class AboutFragment : Fragment() {
         }
     }
     
+    private fun showDeveloperInfo() {
+        val developerInfo = """
+            معلومات المطور:
+            
+            الاسم: أحمد محمد علي
+            الهاتف: +965 12345678
+            واتساب: +965 12345678
+            البريد الإلكتروني: ahmed@example.com
+            
+            حقوق النشر © 2025
+            جميع الحقوق محفوظة
+            
+            تم تطوير هذا التطبيق باستخدام:
+            • Kotlin
+            • Android Jetpack
+            • Material Design 3
+            • Room Database
+            • MVVM Architecture
+        """.trimIndent()
+        
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("معلومات المطور")
+            .setMessage(developerInfo)
+            .setPositiveButton("حسناً", null)
+            .show()
+    }
+    
     private fun showContactDialog(title: String, message: String) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(title)
