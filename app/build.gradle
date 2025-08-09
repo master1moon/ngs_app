@@ -68,4 +68,14 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    
+    // Export Libraries
+    implementation 'com.itextpdf:itext7-core:7.2.5'
+    implementation 'com.itextpdf:font-asian:7.2.5'
+    implementation 'org.apache.poi:poi:5.2.3'
+    implementation 'org.apache.poi:poi-ooxml:5.2.3'
+    implementation 'org.apache.poi:poi-ooxml-schemas:4.1.2'
+    implementation 'org.apache.xmlbeans:xmlbeans:5.1.1'
+    implementation 'org.apache.commons:commons-compress:1.21'
+    implementation 'commons-io:commons-io:2.11.0'
 }

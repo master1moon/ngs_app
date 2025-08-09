@@ -45,4 +45,7 @@
     <!-- ألوان التدرج -->
     <color name="gradient_start">#f8f9fa</color>
     <color name="gradient_end">#e9ecef</color>
+    
+    <!-- ألوان التواصل -->
+    <color name="whatsapp_green">#25D366</color>
 </resources>
