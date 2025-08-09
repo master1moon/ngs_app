@@ -21,6 +21,23 @@
     <string name="recent_packages">أحدث الباقات</string>
     <string name="recent_stores">أحدث المحلات</string>
     
+    <!-- Packages -->
+    <string name="add_package">إضافة باقة</string>
+    <string name="edit_package">تعديل الباقة</string>
+    <string name="package_name">اسم الباقة</string>
+    <string name="package_name_hint">أدخل اسم الباقة</string>
+    <string name="retail_price">سعر التجزئة</string>
+    <string name="wholesale_price">سعر الجملة</string>
+    <string name="distributor_price">سعر الموزعين</string>
+    <string name="price_hint">أدخل السعر</string>
+    <string name="package_image">صورة الباقة</string>
+    <string name="package_date">تاريخ الإضافة</string>
+    <string name="no_packages">لا توجد باقات</string>
+    <string name="no_packages_message">اضغط على زر الإضافة لإنشاء باقة جديدة</string>
+    <string name="retail_label">تجزئة</string>
+    <string name="wholesale_label">جملة</string>
+    <string name="distributor_label">موزعين</string>
+    
     <!-- Common -->
     <string name="add">إضافة</string>
     <string name="edit">تعديل</string>
