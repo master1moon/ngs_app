@@ -30,8 +30,7 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/ic_network"
-                    android:tint="@color/primary"
+                    android:src="@drawable/ic_app_logo"
                     android:layout_marginBottom="16dp" />
 
                 <TextView

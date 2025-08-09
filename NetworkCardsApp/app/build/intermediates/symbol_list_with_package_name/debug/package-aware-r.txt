@@ -3071,6 +3071,7 @@ drawable design_snackbar_background
 drawable dialog_background
 drawable expense_icon_background
 drawable ic_add
+drawable ic_app_logo
 drawable ic_arrow_back_black_24
 drawable ic_backup
 drawable ic_calendar
