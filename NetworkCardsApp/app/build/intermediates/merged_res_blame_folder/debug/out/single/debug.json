@@ -1,15 +1,15 @@
 [
     {
-        "merged": "com.ngs.cards775396439.app-merged_res-53:/layout_activity_main.xml.flat",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/activity_main.xml"
-    },
-    {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/drawable_ic_payment.xml.flat",
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/drawable/ic_payment.xml"
     },
     {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/drawable_ic_wholesale.xml.flat",
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/drawable/ic_wholesale.xml"
+    },
+    {
+        "merged": "com.ngs.cards775396439.app-merged_res-53:/layout_fragment_importexport.xml.flat",
+        "source": "com.ngs.cards775396439.app-main-55:/layout/fragment_importexport.xml"
     },
     {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/drawable_ic_edit.xml.flat",
@@ -28,16 +28,24 @@
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/drawable/ic_expense.xml"
     },
     {
-        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/drawable_ic_save.xml.flat",
-        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/drawable/ic_save.xml"
-    },
-    {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/mipmap-xhdpi_ic_launcher_round.xml.flat",
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/mipmap-xhdpi/ic_launcher_round.xml"
     },
     {
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/drawable_ic_save.xml.flat",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/drawable/ic_save.xml"
+    },
+    {
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/layout_fragment_importexport.xml.flat",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_importexport.xml"
+    },
+    {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/drawable_ic_pdf.xml.flat",
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/drawable/ic_pdf.xml"
+    },
+    {
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/layout_fragment_stores.xml.flat",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_stores.xml"
     },
     {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/menu_nav_menu.xml.flat",
@@ -46,6 +54,10 @@
     {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/mipmap-xxxhdpi_ic_launcher.xml.flat",
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/mipmap-xxxhdpi/ic_launcher.xml"
+    },
+    {
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/layout_fragment_inventory.xml.flat",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_inventory.xml"
     },
     {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/layout_nav_header.xml.flat",
@@ -64,6 +76,10 @@
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/drawable/ic_import_export.xml"
     },
     {
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/layout_fragment_payments.xml.flat",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_payments.xml"
+    },
+    {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/drawable_ic_add.xml.flat",
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/drawable/ic_add.xml"
     },
@@ -74,6 +90,10 @@
     {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/drawable_ic_view.xml.flat",
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/drawable/ic_view.xml"
+    },
+    {
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/layout_fragment_expenses.xml.flat",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_expenses.xml"
     },
     {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/drawable_ic_export.xml.flat",
@@ -140,6 +160,10 @@
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/mipmap-mdpi/ic_launcher.xml"
     },
     {
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/layout_fragment_about.xml.flat",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_about.xml"
+    },
+    {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/drawable_ic_network.xml.flat",
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/drawable/ic_network.xml"
     },
@@ -158,6 +182,10 @@
     {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/mipmap-hdpi_ic_launcher_round.xml.flat",
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/mipmap-hdpi/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/layout_fragment_sales.xml.flat",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_sales.xml"
     },
     {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/drawable_ic_menu.xml.flat",
@@ -236,6 +264,10 @@
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/drawable/ic_backup.xml"
     },
     {
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/layout_fragment_reports.xml.flat",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_reports.xml"
+    },
+    {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/drawable_sale_icon_background.xml.flat",
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/drawable/sale_icon_background.xml"
     },
@@ -266,5 +298,9 @@
     {
         "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/drawable_ic_email.xml.flat",
         "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/drawable/ic_email.xml"
+    },
+    {
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-merged_res-53:/layout_fragment_dashboard.xml.flat",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_dashboard.xml"
     }
 ]

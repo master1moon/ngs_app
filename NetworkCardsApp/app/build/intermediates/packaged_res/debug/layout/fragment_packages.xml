@@ -10,40 +10,38 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="قسم الباقات"
+        android:text="@string/packages_title"
         android:textColor="@color/primary"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="32dp" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="مرحباً بك في نظام بيع الكروت والمصروفات!\n\nاضغط هنا لإضافة باقة تجريبية"
-        android:textColor="@color/text_primary"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:background="@color/surface"
-        android:padding="16dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:visibility="gone" />
+        android:text="@string/packages_title"
+        android:textColor="@color/text_primary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/packages_description"
+        android:textColor="@color/text_secondary"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginBottom="32dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="اضغط على النص أعلاه لإضافة باقة تجريبية"
+        android:text="سيتم إضافة واجهة إدارة الباقات هنا"
         android:textColor="@color/text_secondary"
-        android:textSize="12sp"
-        android:layout_marginTop="16dp" />
+        android:textSize="14sp"
+        android:gravity="center" />
 
 </LinearLayout>

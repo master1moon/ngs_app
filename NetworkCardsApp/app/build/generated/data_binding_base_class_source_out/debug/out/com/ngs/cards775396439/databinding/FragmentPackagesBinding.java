@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,16 +20,16 @@ public final class FragmentPackagesBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
-  public final ProgressBar progressBar;
+  public final TextView tvDescription;
 
   @NonNull
-  public final TextView textView;
+  public final TextView tvTitle;
 
-  private FragmentPackagesBinding(@NonNull LinearLayout rootView, @NonNull ProgressBar progressBar,
-      @NonNull TextView textView) {
+  private FragmentPackagesBinding(@NonNull LinearLayout rootView, @NonNull TextView tvDescription,
+      @NonNull TextView tvTitle) {
     this.rootView = rootView;
-    this.progressBar = progressBar;
-    this.textView = textView;
+    this.tvDescription = tvDescription;
+    this.tvTitle = tvTitle;
   }
 
   @Override
@@ -60,19 +59,19 @@ public final class FragmentPackagesBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.progressBar;
-      ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
-      if (progressBar == null) {
+      id = R.id.tvDescription;
+      TextView tvDescription = ViewBindings.findChildViewById(rootView, id);
+      if (tvDescription == null) {
         break missingId;
       }
 
-      id = R.id.textView;
-      TextView textView = ViewBindings.findChildViewById(rootView, id);
-      if (textView == null) {
+      id = R.id.tvTitle;
+      TextView tvTitle = ViewBindings.findChildViewById(rootView, id);
+      if (tvTitle == null) {
         break missingId;
       }
 
-      return new FragmentPackagesBinding((LinearLayout) rootView, progressBar, textView);
+      return new FragmentPackagesBinding((LinearLayout) rootView, tvDescription, tvTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
