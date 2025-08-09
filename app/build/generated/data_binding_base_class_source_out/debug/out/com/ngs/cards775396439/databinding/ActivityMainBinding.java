@@ -4,12 +4,14 @@ package com.ngs.cards775396439.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
 import com.ngs.cards775396439.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -17,19 +19,33 @@ import java.lang.String;
 
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final DrawerLayout rootView;
 
   @NonNull
-  public final TextView textView;
+  public final DrawerLayout drawerLayout;
 
-  private ActivityMainBinding(@NonNull LinearLayout rootView, @NonNull TextView textView) {
+  @NonNull
+  public final FrameLayout fragmentContainer;
+
+  @NonNull
+  public final NavigationView navigationView;
+
+  @NonNull
+  public final MaterialToolbar toolbar;
+
+  private ActivityMainBinding(@NonNull DrawerLayout rootView, @NonNull DrawerLayout drawerLayout,
+      @NonNull FrameLayout fragmentContainer, @NonNull NavigationView navigationView,
+      @NonNull MaterialToolbar toolbar) {
     this.rootView = rootView;
-    this.textView = textView;
+    this.drawerLayout = drawerLayout;
+    this.fragmentContainer = fragmentContainer;
+    this.navigationView = navigationView;
+    this.toolbar = toolbar;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public DrawerLayout getRoot() {
     return rootView;
   }
 
@@ -54,13 +70,28 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.textView;
-      TextView textView = ViewBindings.findChildViewById(rootView, id);
-      if (textView == null) {
+      DrawerLayout drawerLayout = (DrawerLayout) rootView;
+
+      id = R.id.fragmentContainer;
+      FrameLayout fragmentContainer = ViewBindings.findChildViewById(rootView, id);
+      if (fragmentContainer == null) {
         break missingId;
       }
 
-      return new ActivityMainBinding((LinearLayout) rootView, textView);
+      id = R.id.navigationView;
+      NavigationView navigationView = ViewBindings.findChildViewById(rootView, id);
+      if (navigationView == null) {
+        break missingId;
+      }
+
+      id = R.id.toolbar;
+      MaterialToolbar toolbar = ViewBindings.findChildViewById(rootView, id);
+      if (toolbar == null) {
+        break missingId;
+      }
+
+      return new ActivityMainBinding((DrawerLayout) rootView, drawerLayout, fragmentContainer,
+          navigationView, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

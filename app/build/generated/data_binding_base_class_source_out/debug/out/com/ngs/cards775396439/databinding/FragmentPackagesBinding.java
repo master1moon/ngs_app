@@ -5,14 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ngs.cards775396439.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -20,47 +18,24 @@ import java.lang.String;
 
 public final class FragmentPackagesBinding implements ViewBinding {
   @NonNull
-  private final CoordinatorLayout rootView;
+  private final LinearLayout rootView;
 
   @NonNull
-  public final MaterialButton btnExportExcel;
+  public final ProgressBar progressBar;
 
   @NonNull
-  public final MaterialButton btnExportJson;
+  public final TextView textView;
 
-  @NonNull
-  public final MaterialButton btnExportPdf;
-
-  @NonNull
-  public final LinearLayout emptyState;
-
-  @NonNull
-  public final FloatingActionButton fabAddPackage;
-
-  @NonNull
-  public final LinearLayout loadingState;
-
-  @NonNull
-  public final RecyclerView recyclerViewPackages;
-
-  private FragmentPackagesBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull MaterialButton btnExportExcel, @NonNull MaterialButton btnExportJson,
-      @NonNull MaterialButton btnExportPdf, @NonNull LinearLayout emptyState,
-      @NonNull FloatingActionButton fabAddPackage, @NonNull LinearLayout loadingState,
-      @NonNull RecyclerView recyclerViewPackages) {
+  private FragmentPackagesBinding(@NonNull LinearLayout rootView, @NonNull ProgressBar progressBar,
+      @NonNull TextView textView) {
     this.rootView = rootView;
-    this.btnExportExcel = btnExportExcel;
-    this.btnExportJson = btnExportJson;
-    this.btnExportPdf = btnExportPdf;
-    this.emptyState = emptyState;
-    this.fabAddPackage = fabAddPackage;
-    this.loadingState = loadingState;
-    this.recyclerViewPackages = recyclerViewPackages;
+    this.progressBar = progressBar;
+    this.textView = textView;
   }
 
   @Override
   @NonNull
-  public CoordinatorLayout getRoot() {
+  public LinearLayout getRoot() {
     return rootView;
   }
 
@@ -85,51 +60,19 @@ public final class FragmentPackagesBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.btnExportExcel;
-      MaterialButton btnExportExcel = ViewBindings.findChildViewById(rootView, id);
-      if (btnExportExcel == null) {
+      id = R.id.progressBar;
+      ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
+      if (progressBar == null) {
         break missingId;
       }
 
-      id = R.id.btnExportJson;
-      MaterialButton btnExportJson = ViewBindings.findChildViewById(rootView, id);
-      if (btnExportJson == null) {
+      id = R.id.textView;
+      TextView textView = ViewBindings.findChildViewById(rootView, id);
+      if (textView == null) {
         break missingId;
       }
 
-      id = R.id.btnExportPdf;
-      MaterialButton btnExportPdf = ViewBindings.findChildViewById(rootView, id);
-      if (btnExportPdf == null) {
-        break missingId;
-      }
-
-      id = R.id.emptyState;
-      LinearLayout emptyState = ViewBindings.findChildViewById(rootView, id);
-      if (emptyState == null) {
-        break missingId;
-      }
-
-      id = R.id.fabAddPackage;
-      FloatingActionButton fabAddPackage = ViewBindings.findChildViewById(rootView, id);
-      if (fabAddPackage == null) {
-        break missingId;
-      }
-
-      id = R.id.loadingState;
-      LinearLayout loadingState = ViewBindings.findChildViewById(rootView, id);
-      if (loadingState == null) {
-        break missingId;
-      }
-
-      id = R.id.recyclerViewPackages;
-      RecyclerView recyclerViewPackages = ViewBindings.findChildViewById(rootView, id);
-      if (recyclerViewPackages == null) {
-        break missingId;
-      }
-
-      return new FragmentPackagesBinding((CoordinatorLayout) rootView, btnExportExcel,
-          btnExportJson, btnExportPdf, emptyState, fabAddPackage, loadingState,
-          recyclerViewPackages);
+      return new FragmentPackagesBinding((LinearLayout) rootView, progressBar, textView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
