@@ -1,27 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#1976D2</color>
-    <color name="primary_dark">#1565C0</color>
-    <color name="primary_light">#BBDEFB</color>
-    <color name="accent">#FF5722</color>
-    <color name="accent_light">#FFCCBC</color>
-    <color name="primary_variant">#0D47A1</color>
-    <color name="secondary_variant">#FF6F00</color>
+    <!-- الألوان الأساسية من الملف المرجعي -->
+    <color name="primary">#2c3e50</color>
+    <color name="secondary">#3498db</color>
+    <color name="accent">#e74c3c</color>
+    <color name="success">#27ae60</color>
+    <color name="warning">#f39c12</color>
+    <color name="light">#ecf0f1</color>
+    <color name="dark">#2c3e50</color>
     
-    <color name="dark">#212121</color>
+    <!-- ألوان إضافية -->
+    <color name="primary_dark">#1a2530</color>
+    <color name="primary_light">#34495e</color>
+    <color name="accent_light">#ff6b6b</color>
+    <color name="primary_variant">#1a2530</color>
+    <color name="secondary_variant">#2980b9</color>
+    
+    <!-- ألوان النص والخلفية -->
+    <color name="text_primary">#333</color>
+    <color name="text_secondary">#6c757d</color>
+    <color name="text_muted">#777</color>
     <color name="gray">#757575</color>
-    <color name="light_gray">#F5F5F5</color>
+    <color name="light_gray">#f5f7fa</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     
-    <color name="success">#4CAF50</color>
-    <color name="warning">#FF9800</color>
-    <color name="error">#F44336</color>
-    <color name="info">#2196F3</color>
+    <!-- ألوان الحالة -->
+    <color name="error">#e74c3c</color>
+    <color name="info">#3498db</color>
     
-    <color name="background">#FAFAFA</color>
+    <!-- ألوان الخلفية -->
+    <color name="background">#f5f7fa</color>
     <color name="surface">#FFFFFF</color>
-    <color name="on_surface">#212121</color>
+    <color name="on_surface">#333</color>
     <color name="on_primary">#FFFFFF</color>
-    <color name="on_secondary">#000000</color>
+    <color name="on_secondary">#FFFFFF</color>
+    
+    <!-- ألوان الظلال والحدود -->
+    <color name="shadow_light">rgba(0,0,0,0.05)</color>
+    <color name="shadow_medium">rgba(0,0,0,0.1)</color>
+    <color name="border_light">#eee</color>
+    <color name="border_primary">#2c3e50</color>
+    
+    <!-- ألوان التدرج -->
+    <color name="gradient_start">#f8f9fa</color>
+    <color name="gradient_end">#e9ecef</color>
 </resources>
