@@ -1051,4 +1051,123 @@ class ExportUtils(private val context: Context) {
         
         return jsonObject.toString()
     }
+
+    // Payments Export Functions
+    fun exportPaymentsToPdf(context: Context, payments: List<Payment>) {
+        val fileName = "payments_${getCurrentDate()}.pdf"
+        val file = File(context.getExternalFilesDir(null), fileName)
+        
+        try {
+            val document = Document()
+            PdfWriter.getInstance(document, FileOutputStream(file))
+            document.open()
+            
+            // Add Arabic font
+            val font = BaseFont.createFont("assets/fonts/arabic_font.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
+            val arabicFont = Font(font, 12f)
+            val titleFont = Font(font, 18f, Font.BOLD)
+            val subtitleFont = Font(font, 14f, Font.BOLD)
+            
+            // Title
+            val title = Paragraph("تقرير المدفوعات", titleFont)
+            title.alignment = Element.ALIGN_CENTER
+            document.add(title)
+            document.add(Paragraph(" ", arabicFont))
+            
+            // Payments Table
+            val paymentsTable = PdfPTable(4)
+            paymentsTable.widthPercentage = 100f
+            
+            val paymentsHeaders = arrayOf("المحل", "المبلغ", "الملاحظات", "التاريخ")
+            paymentsHeaders.forEach { header ->
+                val cell = PdfPCell(Phrase(header, arabicFont))
+                cell.horizontalAlignment = Element.ALIGN_CENTER
+                cell.backgroundColor = BaseColor.LIGHT_GRAY
+                paymentsTable.addCell(cell)
+            }
+            
+            payments.forEach { payment ->
+                paymentsTable.addCell(PdfPCell(Phrase(payment.storeId, arabicFont)))
+                paymentsTable.addCell(PdfPCell(Phrase(formatPrice(payment.amount), arabicFont)))
+                paymentsTable.addCell(PdfPCell(Phrase(payment.notes, arabicFont)))
+                paymentsTable.addCell(PdfPCell(Phrase(payment.date, arabicFont)))
+            }
+            
+            document.add(paymentsTable)
+            
+            // Summary
+            val totalPayments = payments.sumOf { it.amount }
+            
+            document.add(Paragraph(" ", arabicFont))
+            document.add(Paragraph("الملخص:", subtitleFont))
+            document.add(Paragraph("إجمالي المدفوعات: ${formatPrice(totalPayments)}", arabicFont))
+            document.add(Paragraph("عدد العمليات: ${payments.size}", arabicFont))
+            
+            document.close()
+            
+        } catch (e: Exception) {
+            throw Exception("خطأ في إنشاء ملف PDF: ${e.message}")
+        }
+    }
+
+    fun exportPaymentsToExcel(context: Context, payments: List<Payment>) {
+        val fileName = "payments_${getCurrentDate()}.xlsx"
+        val file = File(context.getExternalFilesDir(null), fileName)
+        
+        try {
+            val workbook = XSSFWorkbook()
+            val sheet = workbook.createSheet("المدفوعات")
+            
+            val headers = arrayOf("المحل", "المبلغ", "الملاحظات", "التاريخ")
+            val headerRow = sheet.createRow(0)
+            headers.forEachIndexed { index, header ->
+                val cell = headerRow.createCell(index)
+                cell.setCellValue(header)
+            }
+            
+            payments.forEachIndexed { index, payment ->
+                val row = sheet.createRow(index + 1)
+                row.createCell(0).setCellValue(payment.storeId)
+                row.createCell(1).setCellValue(formatPrice(payment.amount))
+                row.createCell(2).setCellValue(payment.notes)
+                row.createCell(3).setCellValue(payment.date)
+            }
+            
+            // Auto-size columns
+            (0..3).forEach { sheet.autoSizeColumn(it) }
+            
+            // Save file
+            val outputStream = FileOutputStream(file)
+            workbook.write(outputStream)
+            workbook.close()
+            outputStream.close()
+            
+        } catch (e: Exception) {
+            throw Exception("خطأ في إنشاء ملف Excel: ${e.message}")
+        }
+    }
+
+    fun exportPaymentsToJson(context: Context, payments: List<Payment>): String {
+        val jsonObject = JSONObject()
+        
+        // Payments array
+        val paymentsArray = JSONArray()
+        payments.forEach { payment ->
+            val paymentObject = JSONObject().apply {
+                put("id", payment.id)
+                put("storeId", payment.storeId)
+                put("amount", payment.amount)
+                put("notes", payment.notes)
+                put("date", payment.date)
+            }
+            paymentsArray.put(paymentObject)
+        }
+        
+        jsonObject.put("payments", paymentsArray)
+        jsonObject.put("exportDate", getCurrentDate())
+        jsonObject.put("totalPayments", payments.size)
+        jsonObject.put("totalAmount", payments.sumOf { it.amount })
+        
+        return jsonObject.toString()
+    }
 }

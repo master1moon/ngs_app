@@ -171,6 +171,22 @@
     <string name="amount_must_be_positive">يجب أن يكون المبلغ أكبر من صفر</string>
     <string name="price_must_be_positive">يجب أن يكون السعر أكبر من صفر</string>
     
+    <!-- Payments Section -->
+    <string name="payments_title">المدفوعات</string>
+    <string name="payments_description">إدارة مدفوعات المحلات</string>
+    <string name="add_payment">إضافة مدفوعات</string>
+    <string name="edit_payment">تعديل المدفوعات</string>
+    <string name="delete_payment_title">حذف المدفوعات</string>
+    <string name="delete_payment_message">هل أنت متأكد من حذف المدفوعات: %s؟</string>
+    <string name="payment_deleted">تم حذف المدفوعات بنجاح</string>
+    <string name="no_payments">لا توجد مدفوعات</string>
+    <string name="add_first_payment">أضف أول مدفوعات</string>
+    <string name="loading_payments">جاري تحميل المدفوعات...</string>
+    <string name="payment_amount_hint">المبلغ</string>
+    <string name="payment_notes_hint">ملاحظات الدفع</string>
+    <string name="payment_date_hint">التاريخ</string>
+    <string name="payment_notes_required">يرجى إدخال ملاحظات الدفع</string>
+    
     <!-- About Section -->
     <string name="developer_name">أحمد محمد</string>
     <string name="developer_phone">+965 12345678</string>
