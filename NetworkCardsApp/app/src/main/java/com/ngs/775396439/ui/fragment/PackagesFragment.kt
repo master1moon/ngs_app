@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.ngs.`775396439`.data.AppDatabase
 import com.ngs.`775396439`.data.entity.Package
 import com.ngs.`775396439`.data.repository.NetworkCardsRepository
@@ -19,14 +21,13 @@ import com.ngs.`775396439`.utils.ExportUtils
 import kotlinx.coroutines.launch
 
 class PackagesFragment : Fragment() {
-    
+
     private var _binding: FragmentPackagesBinding? = null
     private val binding get() = _binding!!
-    
+
     private lateinit var packagesAdapter: PackagesAdapter
     private lateinit var repository: NetworkCardsRepository
-    private lateinit var exportUtils: ExportUtils
-    
+
     private val viewModel: PackagesViewModel by viewModels {
         object : androidx.lifecycle.ViewModelProvider.Factory {
             override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
@@ -36,7 +37,7 @@ class PackagesFragment : Fragment() {
             }
         }
     }
-    
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,195 +46,178 @@ class PackagesFragment : Fragment() {
         _binding = FragmentPackagesBinding.inflate(inflater, container, false)
         return binding.root
     }
-    
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
         setupRepository()
         setupRecyclerView()
         setupObservers()
-        setupListeners()
+        setupClickListeners()
     }
-    
+
     private fun setupRepository() {
         val database = AppDatabase.getDatabase(requireContext())
         repository = NetworkCardsRepository(database)
-        exportUtils = ExportUtils(requireContext())
     }
-    
+
     private fun setupRecyclerView() {
         packagesAdapter = PackagesAdapter(
-            onEditClick = { package_ ->
-                showPackageDialog(package_)
-            },
-            onDeleteClick = { package_ ->
-                showDeleteConfirmation(package_)
-            }
+            onEditClick = { package_ -> showEditDialog(package_) },
+            onDeleteClick = { package_ -> showDeleteDialog(package_) }
         )
-        
-        binding.packagesRecycler.adapter = packagesAdapter
+
+        binding.recyclerViewPackages.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = packagesAdapter
+        }
     }
-    
+
     private fun setupObservers() {
+        // Observe packages list
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.packages.collect { packages ->
                 packagesAdapter.submitList(packages)
-                updateUI(packages)
+                updateEmptyState(packages.isEmpty())
             }
         }
-        
+
+        // Observe loading state
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isLoading.collect { isLoading ->
-                binding.loadingIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
+                binding.loadingState.visibility = if (isLoading) View.VISIBLE else View.GONE
             }
         }
-        
+
+        // Observe error messages
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.errorMessage.collect { errorMessage ->
-                errorMessage?.let { error ->
-                    showError(error)
+                errorMessage?.let {
+                    showSnackbar(it)
                     viewModel.clearError()
                 }
             }
         }
     }
-    
-    private fun setupListeners() {
+
+    private fun setupClickListeners() {
+        // Add package button
         binding.fabAddPackage.setOnClickListener {
-            showPackageDialog()
+            showAddDialog()
         }
-        
-        // إضافة أزرار التصدير (إذا كانت موجودة في التخطيط)
-        binding.btnExportPdf?.setOnClickListener {
-            exportPackagesToPdf()
+
+        // Export buttons
+        binding.btnExportPdf.setOnClickListener {
+            exportToPdf()
         }
-        
-        binding.btnExportExcel?.setOnClickListener {
-            exportPackagesToExcel()
+
+        binding.btnExportExcel.setOnClickListener {
+            exportToExcel()
         }
-        
-        binding.btnExportJson?.setOnClickListener {
-            exportPackagesToJson()
-        }
-    }
-    
-    private fun updateUI(packages: List<Package>) {
-        binding.packagesCount.text = packages.size.toString()
-        
-        if (packages.isEmpty()) {
-            binding.emptyState.visibility = View.VISIBLE
-            binding.packagesRecycler.visibility = View.GONE
-        } else {
-            binding.emptyState.visibility = View.GONE
-            binding.packagesRecycler.visibility = View.VISIBLE
+
+        binding.btnExportJson.setOnClickListener {
+            exportToJson()
         }
     }
-    
-    private fun showPackageDialog(package_: Package? = null) {
-        val dialog = PackageDialogFragment.newInstance(package_)
-        dialog.setOnSaveCallback { newPackage ->
-            if (package_ != null) {
-                viewModel.updatePackage(newPackage)
-            } else {
+
+    private fun updateEmptyState(isEmpty: Boolean) {
+        binding.emptyState.visibility = if (isEmpty) View.VISIBLE else View.GONE
+        binding.recyclerViewPackages.visibility = if (isEmpty) View.GONE else View.VISIBLE
+    }
+
+    private fun showAddDialog() {
+        PackageDialogFragment.newInstance(
+            package_ = null,
+            onSaveClick = { package_ ->
                 viewModel.addPackage(
-                    name = newPackage.name,
-                    retailPrice = newPackage.retailPrice,
-                    wholesalePrice = newPackage.wholesalePrice,
-                    distributorPrice = newPackage.distributorPrice,
-                    image = newPackage.image
+                    name = package_.name,
+                    retailPrice = package_.retailPrice,
+                    wholesalePrice = package_.wholesalePrice,
+                    distributorPrice = package_.distributorPrice
                 )
             }
-        }
-        dialog.show(childFragmentManager, "package_dialog")
+        ).show(childFragmentManager, "add_package_dialog")
     }
-    
-    private fun showDeleteConfirmation(package_: Package) {
+
+    private fun showEditDialog(package_: Package) {
+        PackageDialogFragment.newInstance(
+            package_ = package_,
+            onSaveClick = { updatedPackage ->
+                viewModel.updatePackage(
+                    id = updatedPackage.id,
+                    name = updatedPackage.name,
+                    retailPrice = updatedPackage.retailPrice,
+                    wholesalePrice = updatedPackage.wholesalePrice,
+                    distributorPrice = updatedPackage.distributorPrice
+                )
+            }
+        ).show(childFragmentManager, "edit_package_dialog")
+    }
+
+    private fun showDeleteDialog(package_: Package) {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("تأكيد الحذف")
-            .setMessage("هل أنت متأكد من حذف الباقة \"${package_.name}\"؟")
-            .setPositiveButton("حذف") { _, _ ->
+            .setTitle(getString(com.ngs.`775396439`.R.string.delete_package_title))
+            .setMessage(getString(com.ngs.`775396439`.R.string.delete_package_message, package_.name))
+            .setPositiveButton(getString(com.ngs.`775396439`.R.string.delete)) { _, _ ->
                 viewModel.deletePackage(package_)
+                showSnackbar(getString(com.ngs.`775396439`.R.string.package_deleted))
             }
-            .setNegativeButton("إلغاء", null)
-            .show()
-    }
-    
-    private fun showError(message: String) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("خطأ")
-            .setMessage(message)
-            .setPositiveButton("حسناً", null)
+            .setNegativeButton(getString(com.ngs.`775396439`.R.string.cancel), null)
             .show()
     }
 
-    // دوال التصدير
-    private fun exportPackagesToPdf() {
-        val packages = viewModel.packages.value
-        if (packages.isEmpty()) {
-            showError("لا توجد باقات للتصدير")
-            return
-        }
-
-        exportUtils.exportToPdf(
-            title = "تقرير الباقات والأسعار",
-            data = packages,
-            dataType = "packages",
-            onSuccess = { filePath ->
-                showSuccess("تم تصدير البيانات إلى PDF بنجاح\nالمسار: $filePath")
-            },
-            onError = { error ->
-                showError(error)
+    private fun exportToPdf() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val packages = viewModel.packages.value
+                if (packages.isNotEmpty()) {
+                    ExportUtils.exportPackagesToPdf(requireContext(), packages)
+                    showSnackbar(getString(com.ngs.`775396439`.R.string.export_pdf_success))
+                } else {
+                    showSnackbar(getString(com.ngs.`775396439`.R.string.no_data_to_export))
+                }
+            } catch (e: Exception) {
+                showSnackbar(getString(com.ngs.`775396439`.R.string.export_error))
             }
-        )
-    }
-
-    private fun exportPackagesToExcel() {
-        val packages = viewModel.packages.value
-        if (packages.isEmpty()) {
-            showError("لا توجد باقات للتصدير")
-            return
         }
-
-        exportUtils.exportToExcel(
-            title = "تقرير الباقات والأسعار",
-            data = packages,
-            dataType = "packages",
-            onSuccess = { filePath ->
-                showSuccess("تم تصدير البيانات إلى Excel بنجاح\nالمسار: $filePath")
-            },
-            onError = { error ->
-                showError(error)
-            }
-        )
     }
 
-    private fun exportPackagesToJson() {
-        val packages = viewModel.packages.value
-        if (packages.isEmpty()) {
-            showError("لا توجد باقات للتصدير")
-            return
+    private fun exportToExcel() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val packages = viewModel.packages.value
+                if (packages.isNotEmpty()) {
+                    ExportUtils.exportPackagesToExcel(requireContext(), packages)
+                    showSnackbar(getString(com.ngs.`775396439`.R.string.export_excel_success))
+                } else {
+                    showSnackbar(getString(com.ngs.`775396439`.R.string.no_data_to_export))
+                }
+            } catch (e: Exception) {
+                showSnackbar(getString(com.ngs.`775396439`.R.string.export_error))
+            }
         }
+    }
 
-        exportUtils.exportToJson(
-            data = packages,
-            dataType = "packages",
-            onSuccess = { filePath ->
-                showSuccess("تم تصدير البيانات إلى JSON بنجاح\nالمسار: $filePath")
-            },
-            onError = { error ->
-                showError(error)
+    private fun exportToJson() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val packages = viewModel.packages.value
+                if (packages.isNotEmpty()) {
+                    ExportUtils.exportPackagesToJson(requireContext(), packages)
+                    showSnackbar(getString(com.ngs.`775396439`.R.string.export_json_success))
+                } else {
+                    showSnackbar(getString(com.ngs.`775396439`.R.string.no_data_to_export))
+                }
+            } catch (e: Exception) {
+                showSnackbar(getString(com.ngs.`775396439`.R.string.export_error))
             }
-        )
+        }
     }
 
-    private fun showSuccess(message: String) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("نجح التصدير")
-            .setMessage(message)
-            .setPositiveButton("حسناً", null)
-            .show()
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
-    
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
