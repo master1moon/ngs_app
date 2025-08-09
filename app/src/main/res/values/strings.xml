@@ -152,7 +152,6 @@
     <string name="add_first_sale">أضف أول عملية بيع</string>
     <string name="loading_sales">جاري تحميل المبيعات...</string>
     <string name="select_store_hint">اختر المحل</string>
-    <string name="select_package_hint">اختر الباقة</string>
     <string name="sale_reason_hint">سبب البيع</string>
     <string name="sale_quantity_hint">الكمية</string>
     <string name="sale_price_per_unit_hint">سعر الوحدة</string>
@@ -161,14 +160,8 @@
     <string name="store_required">يرجى اختيار المحل</string>
     <string name="package_required">يرجى اختيار الباقة</string>
     <string name="sale_reason_required">يرجى إدخال سبب البيع</string>
-    <string name="quantity_required">يرجى إدخال الكمية</string>
-    <string name="amount_required">يرجى إدخال المبلغ</string>
     <string name="price_per_unit_required">يرجى إدخال سعر الوحدة</string>
-    <string name="invalid_quantity">كمية غير صحيحة</string>
-    <string name="invalid_amount">مبلغ غير صحيح</string>
     <string name="invalid_price">سعر غير صحيح</string>
-    <string name="quantity_must_be_positive">يجب أن تكون الكمية أكبر من صفر</string>
-    <string name="amount_must_be_positive">يجب أن يكون المبلغ أكبر من صفر</string>
     <string name="price_must_be_positive">يجب أن يكون السعر أكبر من صفر</string>
     
     <!-- Payments Section -->
@@ -218,4 +211,12 @@
     <string name="contact_email">إيميل</string>
     <string name="contact_website">موقع</string>
     <string name="copyright">© 2025 جميع الحقوق محفوظة</string>
+    
+    <!-- About Section Additional Strings -->
+    <string name="app_logo">شعار التطبيق</string>
+    <string name="phone">الهاتف</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="website">الموقع الإلكتروني</string>
+    <string name="call">اتصال</string>
+    <string name="whatsapp">واتساب</string>
 </resources>

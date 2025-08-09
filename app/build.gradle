@@ -1,16 +1,16 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
 }
 
 android {
-    namespace 'com.ngs.775396439'
+    namespace 'com.ngs.cards775396439'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.ngs.775396439"
-        minSdk 24
+        applicationId "com.ngs.cards775396439"
+        minSdk 26
         targetSdk 34
         versionCode 1
         versionName "1.2"
@@ -45,10 +45,10 @@ dependencies {
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     
-    // Room Database
-    implementation 'androidx.room:room-runtime:2.6.1'
-    implementation 'androidx.room:room-ktx:2.6.1'
-    kapt 'androidx.room:room-compiler:2.6.1'
+    // Room Database - temporarily commented out
+    // implementation 'androidx.room:room-runtime:2.6.1'
+    // implementation 'androidx.room:room-ktx:2.6.1'
+    // ksp 'androidx.room:room-compiler:2.6.1'
     
     // ViewModel and LiveData
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
@@ -74,7 +74,6 @@ dependencies {
     implementation 'com.itextpdf:font-asian:7.2.5'
     implementation 'org.apache.poi:poi:5.2.3'
     implementation 'org.apache.poi:poi-ooxml:5.2.3'
-    implementation 'org.apache.poi:poi-ooxml-schemas:4.1.2'
     implementation 'org.apache.xmlbeans:xmlbeans:5.1.1'
     implementation 'org.apache.commons:commons-compress:1.21'
     implementation 'commons-io:commons-io:2.11.0'
