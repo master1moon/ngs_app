@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">نظام بيع الكروت والمصروفات</string>
+    <string name="app_version">الإصدار 1.2</string>
+    
+    <!-- Navigation -->
+    <string name="dashboard_title">لوحة التحكم</string>
+    <string name="packages_title">الباقات</string>
+    <string name="packages_description">إدارة باقات الكروت المتاحة</string>
+    <string name="inventory_title">كمية الكروت</string>
+    <string name="stores_title">المحلات</string>
+    <string name="expenses_title">المصروفات</string>
+    <string name="sales_title">المبيعات</string>
+    <string name="payments_title">المدفوعات</string>
+    <string name="reports_title">التقارير</string>
+    <string name="import_export_title">استيراد/تصدير</string>
+    <string name="about_title">حول التطبيق</string>
+    
+    <!-- Common -->
+    <string name="add">إضافة</string>
+    <string name="edit">تعديل</string>
+    <string name="delete">حذف</string>
+    <string name="save">حفظ</string>
+    <string name="cancel">إلغاء</string>
+    <string name="confirm">تأكيد</string>
+    <string name="loading">جاري التحميل...</string>
+    <string name="error">خطأ</string>
+    <string name="success">نجح</string>
+    
+    <!-- Packages -->
+    <string name="package_name">اسم الباقة</string>
+    <string name="package_price">السعر</string>
+    <string name="package_description">الوصف</string>
+                    <string name="no_packages_found">لا توجد باقات</string>
+                <string name="no_stores_found">لا توجد محلات مسجلة</string>
+                <string name="no_expenses_found">لا توجد مصروفات مسجلة</string>
+                <string name="no_sales_found">لا توجد مبيعات مسجلة</string>
+                <string name="no_payments_found">لا توجد مدفوعات مسجلة</string>
+                <string name="call">اتصال</string>
+                <string name="whatsapp">واتساب</string>
+                <string name="email">البريد الإلكتروني</string>
+
+                <!-- Export -->
+    <string name="export_pdf">تصدير PDF</string>
+    <string name="export_excel">تصدير Excel</string>
+    <string name="export_json">تصدير JSON</string>
+    
+    <!-- Icons -->
+    <string name="ic_menu">قائمة</string>
+    <string name="ic_add">إضافة</string>
+    <string name="ic_package">باقة</string>
+    <string name="ic_inventory">مخزون</string>
+    <string name="ic_store">محل</string>
+    <string name="ic_expense">مصروف</string>
+    <string name="ic_sale">بيع</string>
+    <string name="ic_payment">دفع</string>
+    <string name="ic_report">تقرير</string>
+    <string name="ic_export">تصدير</string>
+    <string name="ic_info">معلومات</string>
+    <string name="ic_dashboard">لوحة التحكم</string>
+    <string name="ic_network">شبكة</string>
+</resources>
