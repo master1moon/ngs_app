@@ -1,21 +1,13 @@
 package com.ngs.cards775396439.data.entity
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
-@Entity(tableName = "sales")
 data class Sale(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
-    val storeId: Long,
-    val packageId: Long,
+    val id: String,
+    val storeId: String,
+    val packageId: String,
     val reason: String,
     val quantity: Int,
+    val amount: Double,
     val pricePerUnit: Double,
-    val totalAmount: Double,
-    val date: String,
-    val createdAt: Long = System.currentTimeMillis()
-) : Parcelable
+    val total: Double,
+    val date: String
+)

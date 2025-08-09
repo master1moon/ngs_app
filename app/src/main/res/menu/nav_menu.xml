@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    
+
     <group android:checkableBehavior="single">
-        
+
         <item
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_dashboard"
             android:title="@string/dashboard_title" />
-        
+
         <item
             android:id="@+id/nav_packages"
             android:icon="@drawable/ic_package"
             android:title="@string/packages_title" />
-        
+
         <item
             android:id="@+id/nav_inventory"
             android:icon="@drawable/ic_inventory"
             android:title="@string/inventory_title" />
-        
+
         <item
             android:id="@+id/nav_stores"
             android:icon="@drawable/ic_store"
             android:title="@string/stores_title" />
-        
+
         <item
             android:id="@+id/nav_expenses"
             android:icon="@drawable/ic_expense"
             android:title="@string/expenses_title" />
-        
+
         <item
             android:id="@+id/nav_sales"
             android:icon="@drawable/ic_sale"
             android:title="@string/sales_title" />
-        
+
         <item
             android:id="@+id/nav_payments"
             android:icon="@drawable/ic_payment"
             android:title="@string/payments_title" />
-        
+
         <item
             android:id="@+id/nav_reports"
             android:icon="@drawable/ic_report"
             android:title="@string/reports_title" />
-        
+
         <item
             android:id="@+id/nav_import_export"
             android:icon="@drawable/ic_export"
             android:title="@string/import_export_title" />
-        
+
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info"
             android:title="@string/about_title" />
-        
+
     </group>
-    
+
 </menu>

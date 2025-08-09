@@ -31,9 +31,16 @@
     <string name="package_name">اسم الباقة</string>
     <string name="package_price">السعر</string>
     <string name="package_description">الوصف</string>
-    <string name="no_packages_found">لا توجد باقات</string>
-    
-    <!-- Export -->
+                    <string name="no_packages_found">لا توجد باقات</string>
+                <string name="no_stores_found">لا توجد محلات مسجلة</string>
+                <string name="no_expenses_found">لا توجد مصروفات مسجلة</string>
+                <string name="no_sales_found">لا توجد مبيعات مسجلة</string>
+                <string name="no_payments_found">لا توجد مدفوعات مسجلة</string>
+                <string name="call">اتصال</string>
+                <string name="whatsapp">واتساب</string>
+                <string name="email">البريد الإلكتروني</string>
+
+                <!-- Export -->
     <string name="export_pdf">تصدير PDF</string>
     <string name="export_excel">تصدير Excel</string>
     <string name="export_json">تصدير JSON</string>

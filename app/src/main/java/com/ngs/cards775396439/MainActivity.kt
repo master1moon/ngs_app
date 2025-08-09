@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.ngs.cards775396439.databinding.ActivityMainBinding
-import com.ngs.cards775396439.ui.fragment.PackagesFragment
+import com.ngs.cards775396439.ui.fragment.*
 
 class MainActivity : AppCompatActivity() {
     
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         
         // Load default fragment
         if (savedInstanceState == null) {
-            loadFragment(PackagesFragment())
+            loadFragment(DashboardFragment())
         }
     }
     
@@ -36,13 +36,57 @@ class MainActivity : AppCompatActivity() {
     private fun setupNavigation() {
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.nav_dashboard -> {
+                    loadFragment(DashboardFragment())
+                    binding.drawerLayout.closeDrawers()
+                    true
+                }
                 R.id.nav_packages -> {
                     loadFragment(PackagesFragment())
                     binding.drawerLayout.closeDrawers()
                     true
                 }
+                R.id.nav_inventory -> {
+                    loadFragment(InventoryFragment())
+                    binding.drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_stores -> {
+                    loadFragment(StoresFragment())
+                    binding.drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_expenses -> {
+                    loadFragment(ExpensesFragment())
+                    binding.drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_sales -> {
+                    loadFragment(SalesFragment())
+                    binding.drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_payments -> {
+                    loadFragment(PaymentsFragment())
+                    binding.drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_reports -> {
+                    loadFragment(ReportsFragment())
+                    binding.drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_import_export -> {
+                    loadFragment(ImportExportFragment())
+                    binding.drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_about -> {
+                    loadFragment(AboutFragment())
+                    binding.drawerLayout.closeDrawers()
+                    true
+                }
                 else -> {
-                    // TODO: Load other fragments
                     binding.drawerLayout.closeDrawers()
                     true
                 }
