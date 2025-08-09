@@ -6,8 +6,8 @@
     <color name="accent">#e74c3c</color>
     <color name="success">#27ae60</color>
     <color name="warning">#f39c12</color>
-    <color name="light">#ecf0f1</color>
-    <color name="dark">#2c3e50</color>
+    <color name="light">#ECF0F1</color>
+    <color name="dark">#2C3E50</color>
     
     <!-- ألوان إضافية -->
     <color name="primary_dark">#1a2530</color>
@@ -37,8 +37,8 @@
     <color name="on_secondary">#FFFFFF</color>
     
     <!-- ألوان الظلال والحدود -->
-    <color name="shadow_light">rgba(0,0,0,0.05)</color>
-    <color name="shadow_medium">rgba(0,0,0,0.1)</color>
+    <color name="shadow_light">#0D000000</color>
+    <color name="shadow_medium">#1A000000</color>
     <color name="border_light">#eee</color>
     <color name="border_primary">#2c3e50</color>
     
@@ -48,11 +48,11 @@
     
     <!-- ألوان التواصل -->
     <color name="whatsapp_green">#25D366</color>
-    <color name="info">#2196F3</color>
-    <color name="warning">#FF9800</color>
-    <color name="error">#F44336</color>
+    <color name="info_blue">#2196F3</color>
+    <color name="warning_orange">#FF9800</color>
+    <color name="error_red">#F44336</color>
     <color name="error_light">#FFEBEE</color>
-    <color name="success">#4CAF50</color>
+    <color name="success_green">#4CAF50</color>
     <color name="success_light">#E8F5E8</color>
     <color name="info_light">#E3F2FD</color>
 </resources>
