@@ -25,6 +25,9 @@ interface ExpenseDao {
     @Query("SELECT SUM(amount) FROM expenses")
     suspend fun getTotalExpenses(): Double?
     
-    @Query("SELECT SUM(amount) FROM expenses WHERE date BETWEEN :fromDate AND :toDate")
+    @Query("SELECT SUM(amount) FROM expenses WHERE date >= :fromDate AND date <= :toDate")
     suspend fun getTotalExpensesByDateRange(fromDate: String, toDate: String): Double?
+    
+    @Query("SELECT COUNT(*) FROM expenses")
+    suspend fun getExpensesCount(): Int
 }

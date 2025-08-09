@@ -10,9 +10,6 @@ interface PaymentDao {
     @Query("SELECT * FROM payments ORDER BY date DESC")
     fun getAllPayments(): Flow<List<Payment>>
     
-    @Query("SELECT * FROM payments WHERE storeId = :storeId ORDER BY date DESC")
-    fun getPaymentsByStore(storeId: String): Flow<List<Payment>>
-    
     @Query("SELECT * FROM payments WHERE id = :id")
     suspend fun getPaymentById(id: String): Payment?
     
@@ -25,12 +22,18 @@ interface PaymentDao {
     @Delete
     suspend fun deletePayment(payment: Payment)
     
-    @Query("SELECT SUM(amount) FROM payments")
-    suspend fun getTotalPayments(): Double?
+    @Query("SELECT * FROM payments WHERE storeId = :storeId ORDER BY date DESC")
+    suspend fun getPaymentsByStore(storeId: String): List<Payment>
     
     @Query("SELECT SUM(amount) FROM payments WHERE storeId = :storeId")
     suspend fun getTotalPaymentsByStore(storeId: String): Double?
     
-    @Query("SELECT SUM(amount) FROM payments WHERE date BETWEEN :fromDate AND :toDate")
+    @Query("SELECT SUM(amount) FROM payments")
+    suspend fun getTotalPayments(): Double?
+    
+    @Query("SELECT SUM(amount) FROM payments WHERE date >= :fromDate AND date <= :toDate")
     suspend fun getTotalPaymentsByDateRange(fromDate: String, toDate: String): Double?
+    
+    @Query("SELECT COUNT(*) FROM payments")
+    suspend fun getPaymentsCount(): Int
 }

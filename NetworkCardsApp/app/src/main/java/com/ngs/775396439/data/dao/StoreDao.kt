@@ -22,9 +22,9 @@ interface StoreDao {
     @Delete
     suspend fun deleteStore(store: Store)
     
-    @Query("SELECT COUNT(*) FROM stores")
-    suspend fun getStoresCount(): Int
-    
     @Query("SELECT * FROM stores ORDER BY createdAt DESC LIMIT :limit")
     suspend fun getRecentStores(limit: Int): List<Store>
+    
+    @Query("SELECT COUNT(*) FROM stores")
+    suspend fun getStoresCount(): Int
 }

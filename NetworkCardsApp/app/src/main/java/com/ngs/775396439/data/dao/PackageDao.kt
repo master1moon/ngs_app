@@ -22,9 +22,9 @@ interface PackageDao {
     @Delete
     suspend fun deletePackage(package_: Package)
     
-    @Query("SELECT COUNT(*) FROM packages")
-    suspend fun getPackagesCount(): Int
-    
     @Query("SELECT * FROM packages ORDER BY createdAt DESC LIMIT :limit")
     suspend fun getRecentPackages(limit: Int): List<Package>
+    
+    @Query("SELECT COUNT(*) FROM packages")
+    suspend fun getPackagesCount(): Int
 }
