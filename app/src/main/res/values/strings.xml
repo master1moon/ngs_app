@@ -187,6 +187,26 @@
     <string name="payment_date_hint">التاريخ</string>
     <string name="payment_notes_required">يرجى إدخال ملاحظات الدفع</string>
     
+    <!-- Import/Export Section -->
+    <string name="import_export_title">الاستيراد والتصدير</string>
+    <string name="import_export_description">إدارة استيراد وتصدير البيانات والنسخ الاحتياطي</string>
+    <string name="export_section_title">تصدير البيانات</string>
+    <string name="export_description">تصدير جميع البيانات إلى ملف JSON</string>
+    <string name="export_all_data">تصدير جميع البيانات</string>
+    <string name="import_section_title">استيراد البيانات</string>
+    <string name="import_description">استيراد البيانات من ملف JSON</string>
+    <string name="import_all_data">استيراد جميع البيانات</string>
+    <string name="backup_section_title">النسخ الاحتياطي</string>
+    <string name="backup_description">إنشاء نسخة احتياطية من قاعدة البيانات</string>
+    <string name="backup_database">نسخ احتياطي لقاعدة البيانات</string>
+    <string name="processing_data">جاري معالجة البيانات...</string>
+    <string name="export_confirmation_title">تأكيد التصدير</string>
+    <string name="export_confirmation_message">هل أنت متأكد من تصدير جميع البيانات؟</string>
+    <string name="import_confirmation_title">تأكيد الاستيراد</string>
+    <string name="import_confirmation_message">سيتم استبدال جميع البيانات الموجودة. هل أنت متأكد؟</string>
+    <string name="export_success">تم تصدير البيانات بنجاح</string>
+    <string name="backup_success">تم إنشاء النسخة الاحتياطية بنجاح</string>
+    
     <!-- About Section -->
     <string name="developer_name">أحمد محمد</string>
     <string name="developer_phone">+965 12345678</string>
