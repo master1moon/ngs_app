@@ -15,6 +15,7 @@ import com.ngs.`775396439`.databinding.FragmentPackagesBinding
 import com.ngs.`775396439`.ui.adapter.PackagesAdapter
 import com.ngs.`775396439`.ui.dialog.PackageDialogFragment
 import com.ngs.`775396439`.ui.viewmodel.PackagesViewModel
+import com.ngs.`775396439`.utils.ExportUtils
 import kotlinx.coroutines.launch
 
 class PackagesFragment : Fragment() {
@@ -24,6 +25,7 @@ class PackagesFragment : Fragment() {
     
     private lateinit var packagesAdapter: PackagesAdapter
     private lateinit var repository: NetworkCardsRepository
+    private lateinit var exportUtils: ExportUtils
     
     private val viewModel: PackagesViewModel by viewModels {
         object : androidx.lifecycle.ViewModelProvider.Factory {
@@ -56,6 +58,7 @@ class PackagesFragment : Fragment() {
     private fun setupRepository() {
         val database = AppDatabase.getDatabase(requireContext())
         repository = NetworkCardsRepository(database)
+        exportUtils = ExportUtils(requireContext())
     }
     
     private fun setupRecyclerView() {
@@ -98,6 +101,19 @@ class PackagesFragment : Fragment() {
     private fun setupListeners() {
         binding.fabAddPackage.setOnClickListener {
             showPackageDialog()
+        }
+        
+        // إضافة أزرار التصدير (إذا كانت موجودة في التخطيط)
+        binding.btnExportPdf?.setOnClickListener {
+            exportPackagesToPdf()
+        }
+        
+        binding.btnExportExcel?.setOnClickListener {
+            exportPackagesToExcel()
+        }
+        
+        binding.btnExportJson?.setOnClickListener {
+            exportPackagesToJson()
         }
     }
     
@@ -145,6 +161,74 @@ class PackagesFragment : Fragment() {
     private fun showError(message: String) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("خطأ")
+            .setMessage(message)
+            .setPositiveButton("حسناً", null)
+            .show()
+    }
+
+    // دوال التصدير
+    private fun exportPackagesToPdf() {
+        val packages = viewModel.packages.value
+        if (packages.isEmpty()) {
+            showError("لا توجد باقات للتصدير")
+            return
+        }
+
+        exportUtils.exportToPdf(
+            title = "تقرير الباقات والأسعار",
+            data = packages,
+            dataType = "packages",
+            onSuccess = { filePath ->
+                showSuccess("تم تصدير البيانات إلى PDF بنجاح\nالمسار: $filePath")
+            },
+            onError = { error ->
+                showError(error)
+            }
+        )
+    }
+
+    private fun exportPackagesToExcel() {
+        val packages = viewModel.packages.value
+        if (packages.isEmpty()) {
+            showError("لا توجد باقات للتصدير")
+            return
+        }
+
+        exportUtils.exportToExcel(
+            title = "تقرير الباقات والأسعار",
+            data = packages,
+            dataType = "packages",
+            onSuccess = { filePath ->
+                showSuccess("تم تصدير البيانات إلى Excel بنجاح\nالمسار: $filePath")
+            },
+            onError = { error ->
+                showError(error)
+            }
+        )
+    }
+
+    private fun exportPackagesToJson() {
+        val packages = viewModel.packages.value
+        if (packages.isEmpty()) {
+            showError("لا توجد باقات للتصدير")
+            return
+        }
+
+        exportUtils.exportToJson(
+            data = packages,
+            dataType = "packages",
+            onSuccess = { filePath ->
+                showSuccess("تم تصدير البيانات إلى JSON بنجاح\nالمسار: $filePath")
+            },
+            onError = { error ->
+                showError(error)
+            }
+        )
+    }
+
+    private fun showSuccess(message: String) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("نجح التصدير")
             .setMessage(message)
             .setPositiveButton("حسناً", null)
             .show()

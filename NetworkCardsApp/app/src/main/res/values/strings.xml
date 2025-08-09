@@ -49,6 +49,16 @@
             <string name="no_inventory">لا يوجد مخزون</string>
             <string name="no_inventory_message">اضغط على زر الإضافة لإضافة كمية جديدة</string>
 
+            <!-- About -->
+            <string name="app_logo">شعار التطبيق</string>
+            <string name="developer_name">اسم المطور</string>
+            <string name="phone">الهاتف</string>
+            <string name="email">البريد الإلكتروني</string>
+            <string name="website">الموقع الإلكتروني</string>
+            <string name="call">اتصال</string>
+            <string name="whatsapp">واتساب</string>
+            <string name="app_description">تطبيق نظام بيع الكروت والمصروفات هو تطبيق متكامل لإدارة أعمال بيع الكروت والتحكم في المصروفات. يوفر التطبيق واجهة سهلة الاستخدام لإدارة الباقات والأسعار، تتبع المخزون، إدارة المحلات والبيع، وتسجيل المصروفات. التطبيق مصمم خصيصاً للعمل باللغة العربية ويوفر تقارير مفصلة لمساعدتك في اتخاذ القرارات المالية الصحيحة.</string>
+
               <!-- Common -->
               <string name="add">إضافة</string>
               <string name="edit">تعديل</string>
