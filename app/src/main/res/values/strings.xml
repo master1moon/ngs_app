@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">نظام بيع الكروت</string>
+    
+    <!-- Navigation -->
+    <string name="dashboard">لوحة التحكم</string>
+    <string name="packages">الباقات والأسعار</string>
+    <string name="inventory">كمية الكروت</string>
+    <string name="stores">البقالات والمحلات</string>
+    <string name="expenses">المصروفات</string>
+    <string name="reports">التقارير</string>
+    
+    <!-- Dashboard -->
+    <string name="quick_stats">إحصائيات سريعة</string>
+    <string name="packages_count">عدد الباقات</string>
+    <string name="total_cards">إجمالي الكروت</string>
+    <string name="stores_count">عدد المحلات</string>
+    <string name="total_sales">إجمالي المبيعات</string>
+    <string name="net_profit">صافي الأرباح</string>
+    <string name="recent_packages">أحدث الباقات</string>
+    <string name="recent_stores">أحدث المحلات</string>
+    
+    <!-- Common -->
+    <string name="add">إضافة</string>
+    <string name="edit">تعديل</string>
+    <string name="delete">حذف</string>
+    <string name="save">حفظ</string>
+    <string name="cancel">إلغاء</string>
+    <string name="confirm">تأكيد</string>
+    <string name="name">الاسم</string>
+    <string name="date">التاريخ</string>
+    <string name="amount">المبلغ</string>
+    <string name="notes">ملاحظات</string>
+    <string name="actions">الإجراءات</string>
+    
+    <!-- Price Types -->
+    <string name="retail">تجزئة</string>
+    <string name="wholesale">جملة</string>
+    <string name="distributor">موزعين</string>
+    
+    <!-- Currency -->
+    <string name="currency">ر.ي</string>
+</resources>
