@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SaleDao {
+    
     @Query("SELECT * FROM sales ORDER BY date DESC")
     fun getAllSales(): Flow<List<Sale>>
     
@@ -26,4 +27,10 @@ interface SaleDao {
     
     @Query("SELECT SUM(total) FROM sales")
     suspend fun getTotalSales(): Double?
+    
+    @Query("SELECT SUM(total) FROM sales WHERE storeId = :storeId")
+    suspend fun getTotalSalesByStore(storeId: String): Double?
+    
+    @Query("SELECT SUM(total) FROM sales WHERE date BETWEEN :fromDate AND :toDate")
+    suspend fun getTotalSalesByDateRange(fromDate: String, toDate: String): Double?
 }

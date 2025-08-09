@@ -8,15 +8,16 @@ import java.util.*
 
 class NetworkCardsRepository(private val database: AppDatabase) {
     
-    // Package operations
+    // ==================== Package Operations ====================
     fun getAllPackages(): Flow<List<Package>> = database.packageDao().getAllPackages()
     suspend fun getPackageById(id: String): Package? = database.packageDao().getPackageById(id)
     suspend fun insertPackage(package_: Package) = database.packageDao().insertPackage(package_)
     suspend fun updatePackage(package_: Package) = database.packageDao().updatePackage(package_)
     suspend fun deletePackage(package_: Package) = database.packageDao().deletePackage(package_)
     suspend fun getPackagesCount(): Int = database.packageDao().getPackagesCount()
+    suspend fun getRecentPackages(limit: Int): List<Package> = database.packageDao().getRecentPackages(limit)
     
-    // Inventory operations
+    // ==================== Inventory Operations ====================
     fun getAllInventory(): Flow<List<Inventory>> = database.inventoryDao().getAllInventory()
     fun getInventoryByPackage(packageId: String): Flow<List<Inventory>> = database.inventoryDao().getInventoryByPackage(packageId)
     suspend fun getInventoryById(id: String): Inventory? = database.inventoryDao().getInventoryById(id)
@@ -24,24 +25,28 @@ class NetworkCardsRepository(private val database: AppDatabase) {
     suspend fun updateInventory(inventory: Inventory) = database.inventoryDao().updateInventory(inventory)
     suspend fun deleteInventory(inventory: Inventory) = database.inventoryDao().deleteInventory(inventory)
     suspend fun getTotalCards(): Int = database.inventoryDao().getTotalCards() ?: 0
+    suspend fun getTotalCardsByPackage(packageId: String): Int = database.inventoryDao().getTotalCardsByPackage(packageId) ?: 0
     
-    // Store operations
+    // ==================== Store Operations ====================
     fun getAllStores(): Flow<List<Store>> = database.storeDao().getAllStores()
     suspend fun getStoreById(id: String): Store? = database.storeDao().getStoreById(id)
     suspend fun insertStore(store: Store) = database.storeDao().insertStore(store)
     suspend fun updateStore(store: Store) = database.storeDao().updateStore(store)
     suspend fun deleteStore(store: Store) = database.storeDao().deleteStore(store)
     suspend fun getStoresCount(): Int = database.storeDao().getStoresCount()
+    suspend fun getRecentStores(limit: Int): List<Store> = database.storeDao().getRecentStores(limit)
     
-    // Expense operations
+    // ==================== Expense Operations ====================
     fun getAllExpenses(): Flow<List<Expense>> = database.expenseDao().getAllExpenses()
     suspend fun getExpenseById(id: String): Expense? = database.expenseDao().getExpenseById(id)
     suspend fun insertExpense(expense: Expense) = database.expenseDao().insertExpense(expense)
     suspend fun updateExpense(expense: Expense) = database.expenseDao().updateExpense(expense)
     suspend fun deleteExpense(expense: Expense) = database.expenseDao().deleteExpense(expense)
     suspend fun getTotalExpenses(): Double = database.expenseDao().getTotalExpenses() ?: 0.0
+    suspend fun getTotalExpensesByDateRange(fromDate: String, toDate: String): Double = 
+        database.expenseDao().getTotalExpensesByDateRange(fromDate, toDate) ?: 0.0
     
-    // Sale operations
+    // ==================== Sale Operations ====================
     fun getAllSales(): Flow<List<Sale>> = database.saleDao().getAllSales()
     fun getSalesByStore(storeId: String): Flow<List<Sale>> = database.saleDao().getSalesByStore(storeId)
     suspend fun getSaleById(id: String): Sale? = database.saleDao().getSaleById(id)
@@ -49,8 +54,11 @@ class NetworkCardsRepository(private val database: AppDatabase) {
     suspend fun updateSale(sale: Sale) = database.saleDao().updateSale(sale)
     suspend fun deleteSale(sale: Sale) = database.saleDao().deleteSale(sale)
     suspend fun getTotalSales(): Double = database.saleDao().getTotalSales() ?: 0.0
+    suspend fun getTotalSalesByStore(storeId: String): Double = database.saleDao().getTotalSalesByStore(storeId) ?: 0.0
+    suspend fun getTotalSalesByDateRange(fromDate: String, toDate: String): Double = 
+        database.saleDao().getTotalSalesByDateRange(fromDate, toDate) ?: 0.0
     
-    // Payment operations
+    // ==================== Payment Operations ====================
     fun getAllPayments(): Flow<List<Payment>> = database.paymentDao().getAllPayments()
     fun getPaymentsByStore(storeId: String): Flow<List<Payment>> = database.paymentDao().getPaymentsByStore(storeId)
     suspend fun getPaymentById(id: String): Payment? = database.paymentDao().getPaymentById(id)
@@ -58,8 +66,11 @@ class NetworkCardsRepository(private val database: AppDatabase) {
     suspend fun updatePayment(payment: Payment) = database.paymentDao().updatePayment(payment)
     suspend fun deletePayment(payment: Payment) = database.paymentDao().deletePayment(payment)
     suspend fun getTotalPayments(): Double = database.paymentDao().getTotalPayments() ?: 0.0
+    suspend fun getTotalPaymentsByStore(storeId: String): Double = database.paymentDao().getTotalPaymentsByStore(storeId) ?: 0.0
+    suspend fun getTotalPaymentsByDateRange(fromDate: String, toDate: String): Double = 
+        database.paymentDao().getTotalPaymentsByDateRange(fromDate, toDate) ?: 0.0
     
-    // Utility functions
+    // ==================== Utility Functions ====================
     fun generateId(): String = "id_${System.currentTimeMillis()}"
     
     fun getCurrentDate(): String {
@@ -77,5 +88,34 @@ class NetworkCardsRepository(private val database: AppDatabase) {
         } catch (e: Exception) {
             0.0
         }
+    }
+    
+    // ==================== Business Logic Functions ====================
+    
+    /**
+     * حساب رصيد المحل (المبيعات - التسديدات)
+     */
+    suspend fun getStoreBalance(storeId: String): Double {
+        val totalSales = getTotalSalesByStore(storeId)
+        val totalPayments = getTotalPaymentsByStore(storeId)
+        return totalSales - totalPayments
+    }
+    
+    /**
+     * حساب صافي الأرباح (إجمالي المبيعات - إجمالي المصروفات)
+     */
+    suspend fun getNetProfit(): Double {
+        val totalSales = getTotalSales()
+        val totalExpenses = getTotalExpenses()
+        return totalSales - totalExpenses
+    }
+    
+    /**
+     * حساب صافي الأرباح لفترة زمنية محددة
+     */
+    suspend fun getNetProfitByDateRange(fromDate: String, toDate: String): Double {
+        val totalSales = getTotalSalesByDateRange(fromDate, toDate)
+        val totalExpenses = getTotalExpensesByDateRange(fromDate, toDate)
+        return totalSales - totalExpenses
     }
 }
