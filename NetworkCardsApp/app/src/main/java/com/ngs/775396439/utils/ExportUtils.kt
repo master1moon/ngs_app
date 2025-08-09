@@ -684,4 +684,241 @@ class ExportUtils(private val context: Context) {
         
         return jsonObject.toString()
     }
+
+    // Reports Export Functions
+    fun exportReportsToPdf(context: Context, sales: List<Sale>, expenses: List<Expense>, payments: List<Payment>) {
+        val fileName = "reports_${getCurrentDate()}.pdf"
+        val file = File(context.getExternalFilesDir(null), fileName)
+        
+        try {
+            val document = Document()
+            PdfWriter.getInstance(document, FileOutputStream(file))
+            document.open()
+            
+            // Add Arabic font
+            val font = BaseFont.createFont("assets/fonts/arabic_font.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
+            val arabicFont = Font(font, 12f)
+            val titleFont = Font(font, 18f, Font.BOLD)
+            val subtitleFont = Font(font, 14f, Font.BOLD)
+            
+            // Title
+            val title = Paragraph("التقرير الشامل", titleFont)
+            title.alignment = Element.ALIGN_CENTER
+            document.add(title)
+            document.add(Paragraph(" ", arabicFont))
+            
+            // Sales Section
+            if (sales.isNotEmpty()) {
+                val salesTitle = Paragraph("تقرير المبيعات", subtitleFont)
+                salesTitle.alignment = Element.ALIGN_RIGHT
+                document.add(salesTitle)
+                
+                val salesTable = PdfPTable(5)
+                salesTable.widthPercentage = 100f
+                
+                val salesHeaders = arrayOf("المحل", "الباقة", "الكمية", "المبلغ", "التاريخ")
+                salesHeaders.forEach { header ->
+                    val cell = PdfPCell(Phrase(header, arabicFont))
+                    cell.horizontalAlignment = Element.ALIGN_CENTER
+                    cell.backgroundColor = BaseColor.LIGHT_GRAY
+                    salesTable.addCell(cell)
+                }
+                
+                sales.forEach { sale ->
+                    salesTable.addCell(PdfPCell(Phrase(sale.storeId, arabicFont)))
+                    salesTable.addCell(PdfPCell(Phrase(sale.packageId, arabicFont)))
+                    salesTable.addCell(PdfPCell(Phrase(sale.quantity.toString(), arabicFont)))
+                    salesTable.addCell(PdfPCell(Phrase(formatPrice(sale.total), arabicFont)))
+                    salesTable.addCell(PdfPCell(Phrase(sale.date, arabicFont)))
+                }
+                
+                document.add(salesTable)
+                document.add(Paragraph(" ", arabicFont))
+            }
+            
+            // Expenses Section
+            if (expenses.isNotEmpty()) {
+                val expensesTitle = Paragraph("تقرير المصروفات", subtitleFont)
+                expensesTitle.alignment = Element.ALIGN_RIGHT
+                document.add(expensesTitle)
+                
+                val expensesTable = PdfPTable(4)
+                expensesTable.widthPercentage = 100f
+                
+                val expensesHeaders = arrayOf("النوع", "المبلغ", "الملاحظات", "التاريخ")
+                expensesHeaders.forEach { header ->
+                    val cell = PdfPCell(Phrase(header, arabicFont))
+                    cell.horizontalAlignment = Element.ALIGN_CENTER
+                    cell.backgroundColor = BaseColor.LIGHT_GRAY
+                    expensesTable.addCell(cell)
+                }
+                
+                expenses.forEach { expense ->
+                    expensesTable.addCell(PdfPCell(Phrase(expense.type, arabicFont)))
+                    expensesTable.addCell(PdfPCell(Phrase(formatPrice(expense.amount), arabicFont)))
+                    expensesTable.addCell(PdfPCell(Phrase(expense.notes, arabicFont)))
+                    expensesTable.addCell(PdfPCell(Phrase(expense.date, arabicFont)))
+                }
+                
+                document.add(expensesTable)
+                document.add(Paragraph(" ", arabicFont))
+            }
+            
+            // Summary
+            val totalSales = sales.sumOf { it.total }
+            val totalExpenses = expenses.sumOf { it.amount }
+            val netProfit = totalSales - totalExpenses
+            
+            val summary = Paragraph("الملخص المالي:", subtitleFont)
+            summary.alignment = Element.ALIGN_RIGHT
+            document.add(summary)
+            
+            document.add(Paragraph("إجمالي المبيعات: ${formatPrice(totalSales)}", arabicFont))
+            document.add(Paragraph("إجمالي المصروفات: ${formatPrice(totalExpenses)}", arabicFont))
+            document.add(Paragraph("صافي الأرباح: ${formatPrice(netProfit)}", arabicFont))
+            
+            document.close()
+            
+        } catch (e: Exception) {
+            throw Exception("خطأ في إنشاء ملف PDF: ${e.message}")
+        }
+    }
+
+    fun exportReportsToExcel(context: Context, sales: List<Sale>, expenses: List<Expense>, payments: List<Payment>) {
+        val fileName = "reports_${getCurrentDate()}.xlsx"
+        val file = File(context.getExternalFilesDir(null), fileName)
+        
+        try {
+            val workbook = XSSFWorkbook()
+            
+            // Sales Sheet
+            if (sales.isNotEmpty()) {
+                val salesSheet = workbook.createSheet("المبيعات")
+                val salesHeaders = arrayOf("المحل", "الباقة", "الكمية", "المبلغ", "التاريخ")
+                
+                val salesHeaderRow = salesSheet.createRow(0)
+                salesHeaders.forEachIndexed { index, header ->
+                    val cell = salesHeaderRow.createCell(index)
+                    cell.setCellValue(header)
+                }
+                
+                sales.forEachIndexed { index, sale ->
+                    val row = salesSheet.createRow(index + 1)
+                    row.createCell(0).setCellValue(sale.storeId)
+                    row.createCell(1).setCellValue(sale.packageId)
+                    row.createCell(2).setCellValue(sale.quantity)
+                    row.createCell(3).setCellValue(formatPrice(sale.total))
+                    row.createCell(4).setCellValue(sale.date)
+                }
+                
+                (0..4).forEach { salesSheet.autoSizeColumn(it) }
+            }
+            
+            // Expenses Sheet
+            if (expenses.isNotEmpty()) {
+                val expensesSheet = workbook.createSheet("المصروفات")
+                val expensesHeaders = arrayOf("النوع", "المبلغ", "الملاحظات", "التاريخ")
+                
+                val expensesHeaderRow = expensesSheet.createRow(0)
+                expensesHeaders.forEachIndexed { index, header ->
+                    val cell = expensesHeaderRow.createCell(index)
+                    cell.setCellValue(header)
+                }
+                
+                expenses.forEachIndexed { index, expense ->
+                    val row = expensesSheet.createRow(index + 1)
+                    row.createCell(0).setCellValue(expense.type)
+                    row.createCell(1).setCellValue(formatPrice(expense.amount))
+                    row.createCell(2).setCellValue(expense.notes)
+                    row.createCell(3).setCellValue(expense.date)
+                }
+                
+                (0..3).forEach { expensesSheet.autoSizeColumn(it) }
+            }
+            
+            // Summary Sheet
+            val summarySheet = workbook.createSheet("الملخص")
+            val totalSales = sales.sumOf { it.total }
+            val totalExpenses = expenses.sumOf { it.amount }
+            val netProfit = totalSales - totalExpenses
+            
+            summarySheet.createRow(0).createCell(0).setCellValue("إجمالي المبيعات")
+            summarySheet.createRow(0).createCell(1).setCellValue(formatPrice(totalSales))
+            
+            summarySheet.createRow(1).createCell(0).setCellValue("إجمالي المصروفات")
+            summarySheet.createRow(1).createCell(1).setCellValue(formatPrice(totalExpenses))
+            
+            summarySheet.createRow(2).createCell(0).setCellValue("صافي الأرباح")
+            summarySheet.createRow(2).createCell(1).setCellValue(formatPrice(netProfit))
+            
+            (0..1).forEach { summarySheet.autoSizeColumn(it) }
+            
+            // Save file
+            val outputStream = FileOutputStream(file)
+            workbook.write(outputStream)
+            workbook.close()
+            outputStream.close()
+            
+        } catch (e: Exception) {
+            throw Exception("خطأ في إنشاء ملف Excel: ${e.message}")
+        }
+    }
+
+    fun exportReportsToJson(context: Context, sales: List<Sale>, expenses: List<Expense>, payments: List<Payment>): String {
+        val jsonObject = JSONObject()
+        
+        // Sales array
+        val salesArray = JSONArray()
+        sales.forEach { sale ->
+            val saleObject = JSONObject().apply {
+                put("id", sale.id)
+                put("storeId", sale.storeId)
+                put("packageId", sale.packageId)
+                put("reason", sale.reason)
+                put("quantity", sale.quantity)
+                put("amount", sale.amount)
+                put("pricePerUnit", sale.pricePerUnit)
+                put("total", sale.total)
+                put("date", sale.date)
+            }
+            salesArray.put(saleObject)
+        }
+        
+        // Expenses array
+        val expensesArray = JSONArray()
+        expenses.forEach { expense ->
+            val expenseObject = JSONObject().apply {
+                put("id", expense.id)
+                put("type", expense.type)
+                put("amount", expense.amount)
+                put("notes", expense.notes)
+                put("date", expense.date)
+                put("addLater", expense.addLater)
+            }
+            expensesArray.put(expenseObject)
+        }
+        
+        // Payments array
+        val paymentsArray = JSONArray()
+        payments.forEach { payment ->
+            val paymentObject = JSONObject().apply {
+                put("id", payment.id)
+                put("storeId", payment.storeId)
+                put("amount", payment.amount)
+                put("notes", payment.notes)
+                put("date", payment.date)
+            }
+            paymentsArray.put(paymentObject)
+        }
+        
+        jsonObject.put("sales", salesArray)
+        jsonObject.put("expenses", expensesArray)
+        jsonObject.put("payments", paymentsArray)
+        jsonObject.put("exportDate", getCurrentDate())
+        jsonObject.put("totalSales", sales.size)
+        jsonObject.put("totalExpenses", expenses.size)
+        jsonObject.put("totalPayments", payments.size)
+        
+        return jsonObject.toString()
+    }
 }
