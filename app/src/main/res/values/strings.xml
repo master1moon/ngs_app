@@ -55,6 +55,32 @@
     <string name="delete_package_message">هل أنت متأكد من حذف الباقة \"%s\"؟</string>
     <string name="package_deleted">تم حذف الباقة بنجاح</string>
     
+    <!-- Inventory Section -->
+    <string name="inventory_title">كمية الكروت</string>
+    <string name="inventory_description">إدارة المخزون والكميات المتوفرة</string>
+    <string name="add_inventory">إضافة كمية جديدة</string>
+    <string name="edit_inventory">تعديل الكمية</string>
+    <string name="quantity">الكمية</string>
+    <string name="quantity_hint">أدخل الكمية</string>
+    <string name="inventory_date_hint">تاريخ الإضافة</string>
+    <string name="select_package_hint">اختر الباقة</string>
+    <string name="select_package_required">يرجى اختيار الباقة</string>
+    <string name="quantity_required">يرجى إدخال الكمية</string>
+    <string name="invalid_quantity">كمية غير صحيحة</string>
+    <string name="quantity_must_be_positive">يجب أن تكون الكمية أكبر من صفر</string>
+    <string name="no_inventory">لا يوجد مخزون</string>
+    <string name="add_first_inventory">اضغط على زر الإضافة لإضافة كمية جديدة</string>
+    <string name="loading_inventory">جاري تحميل المخزون...</string>
+    <string name="delete_inventory_title">حذف الكمية</string>
+    <string name="delete_inventory_message">هل أنت متأكد من حذف كمية \"%s\"؟</string>
+    <string name="inventory_deleted">تم حذف الكمية بنجاح</string>
+    <string name="no_packages_available">لا توجد باقات متاحة</string>
+    
+    <!-- Values -->
+    <string name="retail_value">قيمة التجزئة</string>
+    <string name="wholesale_value">قيمة الجملة</string>
+    <string name="distributor_value">قيمة الموزعين</string>
+    
     <!-- Export -->
     <string name="export_pdf">PDF</string>
     <string name="export_excel">Excel</string>

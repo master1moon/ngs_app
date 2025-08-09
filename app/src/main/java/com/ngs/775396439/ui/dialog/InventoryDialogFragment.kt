@@ -10,33 +10,27 @@ import com.ngs.`775396439`.data.entity.Inventory
 import com.ngs.`775396439`.data.entity.Package
 import com.ngs.`775396439`.data.repository.NetworkCardsRepository
 import com.ngs.`775396439`.databinding.DialogInventoryBinding
-import com.ngs.`775396439`.utils.NumberFormatTextWatcher
+import com.ngs.`775396439`.utils.EditTextUtils
 
 class InventoryDialogFragment : DialogFragment() {
 
     private var _binding: DialogInventoryBinding? = null
     private val binding get() = _binding!!
-
+    
     private var inventory: Inventory? = null
     private var packages: List<Package> = emptyList()
-    private var onSaveCallback: ((Inventory) -> Unit)? = null
-
-    // Note: This repository initialization is a placeholder.
-    // In a real app, it should be injected via a DI framework or passed through constructor.
-    private val repository by lazy {
-        NetworkCardsRepository(null)
-    }
+    private var onSaveClick: ((Inventory) -> Unit)? = null
 
     companion object {
-        private const val ARG_INVENTORY = "inventory"
-        private const val ARG_PACKAGES = "packages"
-
-        fun newInstance(inventory: Inventory? = null, packages: List<Package> = emptyList()): InventoryDialogFragment {
+        fun newInstance(
+            inventory: Inventory? = null,
+            packages: List<Package>,
+            onSaveClick: (Inventory) -> Unit
+        ): InventoryDialogFragment {
             return InventoryDialogFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(ARG_INVENTORY, inventory)
-                    putParcelableArrayList(ARG_PACKAGES, ArrayList(packages))
-                }
+                this.inventory = inventory
+                this.packages = packages
+                this.onSaveClick = onSaveClick
             }
         }
     }
@@ -52,109 +46,103 @@ class InventoryDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        inventory = arguments?.getParcelable(ARG_INVENTORY)
-        packages = arguments?.getParcelableArrayList(ARG_PACKAGES) ?: emptyList()
-
+        
         setupViews()
-        setupListeners()
-        setupPackagesSpinner()
-
-        if (inventory != null) {
-            fillData(inventory!!)
-            binding.dialogTitle.text = getString(com.ngs.`775396439`.R.string.edit_inventory)
-        } else {
-            binding.dialogTitle.text = getString(com.ngs.`775396439`.R.string.add_inventory)
-            binding.inventoryDate.setText(repository.getCurrentDate())
-        }
+        setupNumberFormatting()
+        setupPackageSpinner()
+        fillData()
     }
 
     private fun setupViews() {
-        // إعداد حقول الإدخال
-        binding.inventoryQuantity.hint = getString(com.ngs.`775396439`.R.string.quantity_hint)
-        binding.inventoryDate.hint = getString(com.ngs.`775396439`.R.string.date_hint)
-        
-        // تطبيق تنسيق الأرقام على حقل الكمية
-        NumberFormatTextWatcher.applyTo(binding.inventoryQuantity)
-    }
+        // Set dialog title
+        binding.tvDialogTitle.text = if (inventory == null) {
+            getString(com.ngs.`775396439`.R.string.add_inventory)
+        } else {
+            getString(com.ngs.`775396439`.R.string.edit_inventory)
+        }
 
-    private fun setupListeners() {
+        // Set current date
+        binding.etInventoryDate.setText(NetworkCardsRepository(null).getCurrentDate())
+
+        // Setup save button
         binding.btnSave.setOnClickListener {
             saveInventory()
         }
 
+        // Setup cancel button
         binding.btnCancel.setOnClickListener {
             dismiss()
         }
     }
 
-    private fun setupPackagesSpinner() {
-        val packageNames = packages.map { it.name }
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, packageNames)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.inventoryPackage.adapter = adapter
+    private fun setupNumberFormatting() {
+        // Apply number formatting to quantity field
+        EditTextUtils.applyNumberFormatting(binding.etInventoryQuantity)
     }
 
-    private fun fillData(inventory: Inventory) {
-        // تحديد الباقة المحددة
-        val packageIndex = packages.indexOfFirst { it.id == inventory.packageId }
-        if (packageIndex >= 0) {
-            binding.inventoryPackage.setSelection(packageIndex)
-        }
+    private fun setupPackageSpinner() {
+        // Create package names list
+        val packageNames = packages.map { it.name }
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            packageNames
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerPackage.adapter = adapter
+    }
 
-        binding.inventoryQuantity.setText(NumberFormatTextWatcher.formatNumber(inventory.quantity.toLong()))
-        binding.inventoryDate.setText(inventory.createdAt)
+    private fun fillData() {
+        inventory?.let { inv ->
+            // Find the package index
+            val packageIndex = packages.indexOfFirst { it.id == inv.packageId }
+            if (packageIndex >= 0) {
+                binding.spinnerPackage.setSelection(packageIndex)
+            }
+
+            // Fill quantity with formatted number
+            EditTextUtils.setNumericValue(binding.etInventoryQuantity, inv.quantity.toLong())
+            binding.etInventoryDate.setText(inv.createdAt)
+        }
     }
 
     private fun saveInventory() {
-        val selectedPackageIndex = binding.inventoryPackage.selectedItemPosition
-        val quantityText = binding.inventoryQuantity.text.toString().trim()
-        val date = binding.inventoryDate.text.toString().trim()
-
-        if (selectedPackageIndex < 0 || selectedPackageIndex >= packages.size) {
-            binding.inventoryPackage.error = "يرجى اختيار الباقة"
+        val selectedPosition = binding.spinnerPackage.selectedItemPosition
+        if (selectedPosition < 0 || selectedPosition >= packages.size) {
+            binding.spinnerPackage.error = getString(com.ngs.`775396439`.R.string.select_package_required)
             return
         }
 
+        val quantityText = binding.etInventoryQuantity.text.toString()
         if (quantityText.isEmpty()) {
-            binding.inventoryQuantity.error = "يرجى إدخال الكمية"
+            binding.etInventoryQuantity.error = getString(com.ngs.`775396439`.R.string.quantity_required)
             return
         }
 
         val quantity = try {
-            NumberFormatTextWatcher.removeFormatting(quantityText).toInt()
+            EditTextUtils.getNumericValue(binding.etInventoryQuantity).toInt()
         } catch (e: NumberFormatException) {
-            binding.inventoryQuantity.error = "يرجى إدخال كمية صحيحة"
+            binding.etInventoryQuantity.error = getString(com.ngs.`775396439`.R.string.invalid_quantity)
             return
         }
 
         if (quantity <= 0) {
-            binding.inventoryQuantity.error = "يجب أن تكون الكمية أكبر من صفر"
+            binding.etInventoryQuantity.error = getString(com.ngs.`775396439`.R.string.quantity_must_be_positive)
             return
         }
 
-        val selectedPackage = packages[selectedPackageIndex]
-        val newInventory = if (inventory != null) {
-            inventory!!.copy(
-                packageId = selectedPackage.id,
-                quantity = quantity,
-                createdAt = date
-            )
-        } else {
-            Inventory(
-                id = repository.generateId(),
-                packageId = selectedPackage.id,
-                quantity = quantity,
-                createdAt = date.ifBlank { repository.getCurrentDate() }
-            )
-        }
+        val selectedPackage = packages[selectedPosition]
+        val date = binding.etInventoryDate.text.toString()
 
-        onSaveCallback?.invoke(newInventory)
+        val newInventory = Inventory(
+            id = inventory?.id ?: NetworkCardsRepository(null).generateId(),
+            packageId = selectedPackage.id,
+            quantity = quantity,
+            createdAt = date
+        )
+
+        onSaveClick?.invoke(newInventory)
         dismiss()
-    }
-
-    fun setOnSaveCallback(callback: (Inventory) -> Unit) {
-        onSaveCallback = callback
     }
 
     override fun onDestroyView() {
