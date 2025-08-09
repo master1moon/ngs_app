@@ -132,6 +132,14 @@
     <string name="expense_deleted">تم حذف المصروف بنجاح</string>
     <string name="add_later">إضافة لاحقاً</string>
     
+    <!-- Reports Section -->
+    <string name="reports_title">التقارير</string>
+    <string name="reports_description">عرض الإحصائيات والتقارير الشاملة</string>
+    <string name="dashboard_stats">إحصائيات لوحة التحكم</string>
+    <string name="financial_summary">الملخص المالي</string>
+    <string name="total_expenses">إجمالي المصروفات</string>
+    <string name="loading_reports">جاري تحميل التقارير...</string>
+    
     <!-- About Section -->
     <string name="developer_name">أحمد محمد</string>
     <string name="developer_phone">+965 12345678</string>

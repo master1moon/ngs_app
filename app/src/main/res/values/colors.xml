@@ -52,4 +52,6 @@
     <color name="warning">#FF9800</color>
     <color name="error">#F44336</color>
     <color name="error_light">#FFEBEE</color>
+    <color name="success">#4CAF50</color>
+    <color name="success_light">#E8F5E8</color>
 </resources>
