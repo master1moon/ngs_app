@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <!-- صورة الباقة -->
+        <ImageView
+            android:id="@+id/package_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_packages"
+            android:scaleType="centerCrop"
+            android:background="@drawable/package_image_background"
+            android:contentDescription="@string/package_image" />
+
+        <!-- تفاصيل الباقة -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp">
+
+            <!-- اسم الباقة -->
+            <TextView
+                android:id="@+id/package_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="اسم الباقة"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark"
+                tools:text="باقة الإنترنت" />
+
+            <!-- الأسعار -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/retail_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="تجزئة: 0"
+                    android:textSize="12sp"
+                    android:textColor="@color/gray"
+                    tools:text="تجزئة: 1,000" />
+
+                <TextView
+                    android:id="@+id/wholesale_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="جملة: 0"
+                    android:textSize="12sp"
+                    android:textColor="@color/gray"
+                    tools:text="جملة: 800" />
+
+                <TextView
+                    android:id="@+id/distributor_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="موزعين: 0"
+                    android:textSize="12sp"
+                    android:textColor="@color/gray"
+                    tools:text="موزعين: 600" />
+
+            </LinearLayout>
+
+            <!-- تاريخ الإضافة -->
+            <TextView
+                android:id="@+id/package_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="التاريخ"
+                android:textSize="10sp"
+                android:textColor="@color/gray"
+                tools:text="2024-01-15" />
+
+        </LinearLayout>
+
+        <!-- أزرار الإجراءات -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="8dp">
+
+            <!-- زر التعديل -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_edit"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/ic_edit"
+                android:contentDescription="@string/edit"
+                app:iconSize="20dp"
+                app:iconTint="@color/warning" />
+
+            <!-- زر الحذف -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_delete"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_delete"
+                android:contentDescription="@string/delete"
+                app:iconSize="20dp"
+                app:iconTint="@color/accent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

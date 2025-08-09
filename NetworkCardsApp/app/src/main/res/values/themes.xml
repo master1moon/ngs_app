@@ -4,20 +4,29 @@
     <style name="Theme.NetworkCardsApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryVariant">@color/primary_dark</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/secondary</item>
-        <item name="colorSecondaryVariant">@color/secondary</item>
-        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryVariant">@color/secondary_variant</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
         <!-- Customize your theme here. -->
-        <item name="android:textDirection">rtl</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/white</item>
+        <item name="colorWarning">@color/warning</item>
+        <item name="colorSuccess">@color/success</item>
+        <item name="colorInfo">@color/info</item>
+        <!-- RTL Support -->
         <item name="android:layoutDirection">rtl</item>
+        <item name="android:textDirection">rtl</item>
+        <item name="android:textAlignment">viewStart</item>
     </style>
     
     <style name="Theme.NetworkCardsApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    
     <style name="Theme.NetworkCardsApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
