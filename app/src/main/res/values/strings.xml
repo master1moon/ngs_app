@@ -36,11 +36,22 @@
     <string name="no_packages_message">اضغط على زر الإضافة لإنشاء باقة جديدة</string>
     <string name="retail_label">تجزئة</string>
     <string name="wholesale_label">جملة</string>
-    <string name="distributor_label">موزعين</string>
-    
-    <!-- Common -->
-    <string name="add">إضافة</string>
-    <string name="edit">تعديل</string>
+                <string name="distributor_label">موزعين</string>
+
+            <!-- Inventory -->
+            <string name="add_inventory">إضافة كمية جديدة</string>
+            <string name="edit_inventory">تعديل الكمية</string>
+            <string name="select_package">اختر الباقة</string>
+            <string name="quantity">الكمية</string>
+            <string name="quantity_hint">أدخل الكمية</string>
+            <string name="inventory_date">تاريخ الإضافة</string>
+            <string name="date_hint">تاريخ الإضافة</string>
+            <string name="no_inventory">لا يوجد مخزون</string>
+            <string name="no_inventory_message">اضغط على زر الإضافة لإضافة كمية جديدة</string>
+
+              <!-- Common -->
+              <string name="add">إضافة</string>
+              <string name="edit">تعديل</string>
     <string name="delete">حذف</string>
     <string name="save">حفظ</string>
     <string name="cancel">إلغاء</string>
