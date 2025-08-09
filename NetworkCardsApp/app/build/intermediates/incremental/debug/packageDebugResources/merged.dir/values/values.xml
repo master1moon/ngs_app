@@ -71,6 +71,7 @@
     <string name="inventory_title">كمية الكروت</string>
     <string name="loading">جاري التحميل...</string>
     <string name="no_packages_found">لا توجد باقات</string>
+    <string name="no_stores_found">لا توجد محلات مسجلة</string>
     <string name="package_description">الوصف</string>
     <string name="package_name">اسم الباقة</string>
     <string name="package_price">السعر</string>

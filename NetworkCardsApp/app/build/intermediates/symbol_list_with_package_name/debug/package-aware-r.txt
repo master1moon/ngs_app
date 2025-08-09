@@ -3401,12 +3401,15 @@ id etPackageDate
 id etPackageName
 id etQuantity
 id etRetailPrice
+id etStoreDate
+id etStoreName
 id etWholesalePrice
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
 id fabAddInventory
 id fabAddPackage
+id fabAddStore
 id fade
 id fill
 id fill_horizontal
@@ -3613,6 +3616,7 @@ id row_index_key
 id rtl
 id rvInventory
 id rvPackages
+id rvStores
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3656,6 +3660,7 @@ id south
 id spacer
 id special_effects_controller_view_tag
 id spinnerPackage
+id spinnerPriceType
 id spline
 id split_action_bar
 id spread
@@ -3730,9 +3735,11 @@ id tvDistributorValue
 id tvNetProfit
 id tvPackageName
 id tvPackagesCount
+id tvPriceType
 id tvQuantity
 id tvRetailPrice
 id tvRetailValue
+id tvStoreName
 id tvStoresCount
 id tvTitle
 id tvTotalCards
@@ -3896,6 +3903,7 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dialog_inventory
 layout dialog_package
+layout dialog_store
 layout fragment_about
 layout fragment_dashboard
 layout fragment_expenses
@@ -3910,6 +3918,7 @@ layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
 layout item_inventory
 layout item_package
+layout item_store
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -4165,6 +4174,7 @@ string mtrl_timepicker_confirm
 string nav_app_bar_navigate_up_description
 string nav_app_bar_open_drawer_description
 string no_packages_found
+string no_stores_found
 string package_description
 string package_name
 string package_price

@@ -5,24 +5,48 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ngs.cards775396439.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class FragmentStoresBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final CoordinatorLayout rootView;
 
-  private FragmentStoresBinding(@NonNull LinearLayout rootView) {
+  @NonNull
+  public final LinearLayout emptyState;
+
+  @NonNull
+  public final FloatingActionButton fabAddStore;
+
+  @NonNull
+  public final ProgressBar progressBar;
+
+  @NonNull
+  public final RecyclerView rvStores;
+
+  private FragmentStoresBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull LinearLayout emptyState, @NonNull FloatingActionButton fabAddStore,
+      @NonNull ProgressBar progressBar, @NonNull RecyclerView rvStores) {
     this.rootView = rootView;
+    this.emptyState = emptyState;
+    this.fabAddStore = fabAddStore;
+    this.progressBar = progressBar;
+    this.rvStores = rvStores;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -43,10 +67,38 @@ public final class FragmentStoresBinding implements ViewBinding {
 
   @NonNull
   public static FragmentStoresBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
-    }
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.emptyState;
+      LinearLayout emptyState = ViewBindings.findChildViewById(rootView, id);
+      if (emptyState == null) {
+        break missingId;
+      }
 
-    return new FragmentStoresBinding((LinearLayout) rootView);
+      id = R.id.fabAddStore;
+      FloatingActionButton fabAddStore = ViewBindings.findChildViewById(rootView, id);
+      if (fabAddStore == null) {
+        break missingId;
+      }
+
+      id = R.id.progressBar;
+      ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
+      if (progressBar == null) {
+        break missingId;
+      }
+
+      id = R.id.rvStores;
+      RecyclerView rvStores = ViewBindings.findChildViewById(rootView, id);
+      if (rvStores == null) {
+        break missingId;
+      }
+
+      return new FragmentStoresBinding((CoordinatorLayout) rootView, emptyState, fabAddStore,
+          progressBar, rvStores);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }

@@ -101,9 +101,12 @@ id etPackageDate
 id etPackageName
 id etQuantity
 id etRetailPrice
+id etStoreDate
+id etStoreName
 id etWholesalePrice
 id fabAddInventory
 id fabAddPackage
+id fabAddStore
 id fragmentContainer
 id nav_about
 id nav_dashboard
@@ -119,7 +122,9 @@ id navigationView
 id progressBar
 id rvInventory
 id rvPackages
+id rvStores
 id spinnerPackage
+id spinnerPriceType
 id toolbar
 id tvCreatedAt
 id tvDistributorPrice
@@ -127,9 +132,11 @@ id tvDistributorValue
 id tvNetProfit
 id tvPackageName
 id tvPackagesCount
+id tvPriceType
 id tvQuantity
 id tvRetailPrice
 id tvRetailValue
+id tvStoreName
 id tvStoresCount
 id tvTitle
 id tvTotalCards
@@ -139,6 +146,7 @@ id tvWholesaleValue
 layout activity_main
 layout dialog_inventory
 layout dialog_package
+layout dialog_store
 layout fragment_about
 layout fragment_dashboard
 layout fragment_expenses
@@ -151,6 +159,7 @@ layout fragment_sales
 layout fragment_stores
 layout item_inventory
 layout item_package
+layout item_store
 layout nav_header
 layout nav_header_main
 menu nav_menu
@@ -187,6 +196,7 @@ string import_export_title
 string inventory_title
 string loading
 string no_packages_found
+string no_stores_found
 string package_description
 string package_name
 string package_price

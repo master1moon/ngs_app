@@ -1,70 +1,82 @@
 [
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/activity_main.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/activity_main.xml"
-    },
-    {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/nav_header.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/nav_header.xml"
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_sales.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_sales.xml"
     },
     {
         "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_stores.xml",
         "source": "com.ngs.cards775396439.app-main-55:/layout/fragment_stores.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_payments.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/fragment_payments.xml"
+        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/dialog_store.xml",
+        "source": "com.ngs.cards775396439.app-main-55:/layout/dialog_store.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/nav_header_main.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/nav_header_main.xml"
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_about.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_about.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/item_package.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/item_package.xml"
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/item_inventory.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/item_inventory.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_importexport.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/fragment_importexport.xml"
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/activity_main.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/activity_main.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/dialog_package.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/dialog_package.xml"
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_reports.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_reports.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_reports.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/fragment_reports.xml"
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/nav_header_main.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/nav_header_main.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_about.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/fragment_about.xml"
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_stores.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_stores.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_packages.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/fragment_packages.xml"
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_dashboard.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_dashboard.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/dialog_inventory.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/dialog_inventory.xml"
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/dialog_package.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/dialog_package.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_dashboard.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/fragment_dashboard.xml"
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_packages.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_packages.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_sales.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/fragment_sales.xml"
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_payments.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_payments.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/item_inventory.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/item_inventory.xml"
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/nav_header.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/nav_header.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_expenses.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/fragment_expenses.xml"
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_expenses.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_expenses.xml"
     },
     {
-        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_inventory.xml",
-        "source": "com.ngs.cards775396439.app-main-55:/layout/fragment_inventory.xml"
+        "merged": "com.ngs.cards775396439.app-mergeDebugResources-52:/layout/item_store.xml",
+        "source": "com.ngs.cards775396439.app-main-55:/layout/item_store.xml"
+    },
+    {
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_importexport.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_importexport.xml"
+    },
+    {
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/dialog_inventory.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/dialog_inventory.xml"
+    },
+    {
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/fragment_inventory.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/fragment_inventory.xml"
+    },
+    {
+        "merged": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-mergeDebugResources-52:/layout/item_package.xml",
+        "source": "/home/ubuntu/.gradle/daemon/8.5/com.ngs.cards775396439.app-main-55:/layout/item_package.xml"
     }
 ]
